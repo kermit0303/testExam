@@ -1,21 +1,21 @@
 let randomQuestions = [];
-let currentQuestionIndex = 0; // 当前题目的索引
-let timer; // 倒计时定时器
-const totalTime = 60*100; // 设置总时间为60秒
-let timeLeft = totalTime; // 剩余时间
+let currentQuestionIndex = 0; 
+let timer; 
+const totalTime = 60*100; 
+let timeLeft = totalTime; 
 
-// 隨機選擇 8 道題目
+// 隨機選擇 80 道題目
 function getRandomQuestions() {
     const shuffled = questions.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 8);
+    return shuffled.slice(0, 80);
 }
 
-// 顯示题目
+// 顯示題目
 function displayQuestion() {
     const quizContainer = document.getElementById("quiz-container");
-    quizContainer.innerHTML = ""; // 清空当前内容
+    quizContainer.innerHTML = ""; 
 
-    const q = randomQuestions[currentQuestionIndex]; // 获取当前问题
+    const q = randomQuestions[currentQuestionIndex]; 
     const questionElement = document.createElement("div");
     questionElement.classList.add("question");
     questionElement.innerHTML = `<strong>${currentQuestionIndex + 1}. ${q.question}</strong>`;
@@ -32,25 +32,24 @@ function displayQuestion() {
     questionElement.appendChild(optionsList);
     quizContainer.appendChild(questionElement);
 
-    // 更新按钮显示
+    
     document.getElementById("prev-btn").style.display = currentQuestionIndex === 0 ? "none" : "inline";
     document.getElementById("next-btn").style.display = currentQuestionIndex === randomQuestions.length - 1 ? "none" : "inline";
 }
 
-// 倒计时功能
+
 function startTimer() {
     timer = setInterval(() => {
         timeLeft--;
-        document.getElementById("time").innerText = formatTime(timeLeft); // 显示格式化时间
+        document.getElementById("time").innerText = formatTime(timeLeft); 
 
         if (timeLeft <= 0) {
             clearInterval(timer);
-            showresult(); // 超时直接显示结果
+            showresult(); 
         }
     }, 1000);
 }
 
-// 格式化时间为“分钟:秒”
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -59,33 +58,33 @@ function formatTime(seconds) {
 
 // 提交答案
 function submitAnswer() {
-    clearInterval(timer); // 停止倒计时
-    showresult(); // 提交答案并显示结果
+    clearInterval(timer); 
+    showresult(); 
 }
 
-// 重新开始测验
+
 function restartQuiz() {
-    currentQuestionIndex = 0; // 重置当前题目索引
-    timeLeft = totalTime; // 重置剩余时间
-    randomQuestions = getRandomQuestions(); // 重新选择题目
-    displayQuestion(); // 显示第一题
-    startTimer(); // 开始倒计时
-    document.getElementById("result").innerHTML = ""; // 清空结果显示
-    document.getElementById("time").innerText = formatTime(timeLeft); // 更新显示时间
+    currentQuestionIndex = 0; 
+    timeLeft = totalTime; 
+    randomQuestions = getRandomQuestions(); 
+    displayQuestion(); 
+    startTimer(); 
+    document.getElementById("result").innerHTML = ""; 
+    document.getElementById("time").innerText = formatTime(timeLeft); 
 }
 
-// 初始化显示题目
+
 randomQuestions = getRandomQuestions();
 displayQuestion();
-startTimer(); // 开始倒计时
+startTimer(); 
 
-// 处理“下一题”和“上一题”按钮的点击事件
+
 document.getElementById("next-btn").addEventListener("click", () => {
     if (currentQuestionIndex < randomQuestions.length - 1) {
         currentQuestionIndex++;
         displayQuestion();
     } else {
-        showresult(); // 最后一题时直接显示结果
+        showresult(); 
     }
 });
 
@@ -96,25 +95,21 @@ document.getElementById("prev-btn").addEventListener("click", () => {
     }
 });
 
-// 提交按钮事件处理
 document.getElementById("submit-btn").addEventListener("click", () => {
-    submitAnswer(); // 提交答案并显示结果
+    submitAnswer(); 
 });
 
-// 重新开始按钮事件处理
 document.getElementById("restart-btn").addEventListener("click", () => {
-    restartQuiz(); // 重新开始测验
+    restartQuiz(); 
 });
 
-// 作答总览按钮事件处理
 document.getElementById("overview-btn").addEventListener("click", () => {
-    showOverview(); // 显示作答总览
+    showOverview(); 
 });
 
-// 显示结果函数
 function showresult() {
     const quizContainer = document.getElementById("quiz-container");
-    quizContainer.innerHTML = ""; // 清空当前内容
+    quizContainer.innerHTML = ""; 
 
     const resultElement = document.getElementById("result");
     let score = 0;
@@ -122,7 +117,6 @@ function showresult() {
 
     const selectedAnswers = Array.from(document.querySelectorAll("input[type='radio']:checked"));
     
-    // 检查每一题的答案
     randomQuestions.forEach((question, index) => {
         const selectedAnswer = selectedAnswers.find(answer => answer.name === `question${index}`);
         const userAnswer = selectedAnswer ? selectedAnswer.value : "未作答";
@@ -138,10 +132,9 @@ function showresult() {
     resultElement.innerHTML = `您的得分是: ${score} / 8<br><br>${resultDetails}`;
 }
 
-// 显示作答总览
 function showOverview() {
     const overviewContainer = document.getElementById("quiz-container");
-    overviewContainer.innerHTML = ""; // 清空当前内容
+    overviewContainer.innerHTML = ""; 
 
     const overviewElement = document.createElement("div");
     overviewElement.innerHTML = "<h3>作答总览</h3>";
@@ -159,8 +152,7 @@ function showOverview() {
     overviewContainer.appendChild(overviewElement);
 }
 
-// 跳转到特定题目
 function goToQuestion(index) {
-    currentQuestionIndex = index; // 更新当前题目索引
-    displayQuestion(); // 显示指定的题目
+    currentQuestionIndex = index; 
+    displayQuestion(); 
 }
