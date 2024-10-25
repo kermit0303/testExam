@@ -1,7 +1,7 @@
 let randomQuestions = [];
 let currentQuestionIndex = 0; // 当前题目的索引
 let timer; // 倒计时定时器
-const totalTime = 60; // 设置总时间为60秒
+const totalTime = 60*100; // 设置总时间为60秒
 let timeLeft = totalTime; // 剩余时间
 
 // 隨機選擇 8 道題目
