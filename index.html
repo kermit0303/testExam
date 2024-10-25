@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隨機出題系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>隨機出題系統</h1>
+<div id="timer">剩餘時間: <div id="time">100分0秒</div>
+
+
+<div id="quiz-container"></div>
+<button id="prev-btn" style="display:none;">上一题</button>
+<button id="next-btn">下一题</button>
+<button id="overview-btn">作答總覽</button>
+<button id="submit-btn">提交答案</button>
+<div id="result"></div>
+<button id="restart-btn">重新開始</button>
+
+
+<script src="data.js"></script>
+<script src="quiz.js"></script>
+</body>
+</html>
