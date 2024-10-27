@@ -1,3 +1,6 @@
+V1.0.5
+ - [Improvement]修改上一頁的按鈕位置
+
 V1.0.4
  - [Improvement]新增 vue.js
  - [Improvement]修改Button css 
