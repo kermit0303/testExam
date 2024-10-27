@@ -1,3 +1,7 @@
+V1.0.4
+ - [Improvement]新增 vue.js
+ - [Improvement]修改Button css 
+
 V1.0.3
  - [BugFix]分數計算
 

@@ -21,7 +21,21 @@
         .options li {
             margin: 5px 0;
         }
+        @media (max-width: 768px) {
+    button {
+        width: 100%;
+    }
+}
+button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 18px; /* 增加文字大小 */
+}
     </style>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
 </head>
 <body>
 
@@ -30,12 +44,14 @@
 
 
 <div id="quiz-container"></div>
-<button id="prev-btn" style="display:none;">上一题</button>
-<button id="next-btn">下一题</button>
-<button id="overview-btn">作答總覽</button>
-<button id="submit-btn">提交答案</button>
+<button id="prev-btn" style="display:block; width: 100%; margin-bottom: 10px;">上一題</button>
+<button id="next-btn" style="display:block; width: 100%; margin-bottom: 10px;">下一題</button>
+<button id="overview-btn" style="display:block; width: 100%; margin-bottom: 10px;">作答總覽</button>
+<button id="submit-btn" style="display:block; width: 100%; margin-bottom: 10px;">提交答案</button>
+
+<button id="restart-btn" style="display:block; width: 100%; margin-bottom: 10px;">重新開始</button>
 <div id="result"></div>
-<button id="restart-btn">重新開始</button>
+
 
 
 <script src="data.js"></script>
