@@ -1,3 +1,6 @@
+V1.0.6
+ - [Improvement]新的版本功能
+
 V1.0.5
  - [Improvement]修改上一頁的按鈕位置
 
