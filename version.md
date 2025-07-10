@@ -1,3 +1,6 @@
+V1.0.7
+ - [Improvement]更新按鈕功能
+
 V1.0.6
  - [Improvement]新的版本功能
 
