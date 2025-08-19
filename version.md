@@ -1,3 +1,6 @@
+V1.0.8
+ - [Improvement]B醬的遊戲
+
 V1.0.7
  - [Improvement]更新按鈕功能
 
