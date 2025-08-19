@@ -5,76 +5,76 @@
   <title>冒險故事書</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 40px;
-      background: #eae2d6;
-      font-family: 'Noto Serif TC', serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap');
 
-    .book {
-      background: #fffaf0;
-      border: 2px solid #8b5e3c;
-      padding: 40px 60px;
-      width: 700px;
-      max-width: 90%;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-      border-radius: 15px;
-      position: relative;
-    }
+body {
+  margin: 0;
+  padding: 40px;
+  background: #eae2d6;
+  font-family: 'Noto Serif TC', serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
 
-    #title {
-      font-size: 26px;
-      font-weight: bold;
-      border-bottom: 2px solid #c0a16b;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #5b3b16;
-    }
+.book {
+  background: #fffaf0;
+  border: 2px solid #8b5e3c;
+  padding: 40px 60px;
+  width: 700px;
+  max-width: 100%;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  position: relative;
+  box-sizing: border-box;
+}
 
-    #content {
-      font-size: 18px;
-      line-height: 1.7;
-      white-space: pre-line;
-      color: #333;
-    }
+#title {
+  font-size: 26px;
+  font-weight: bold;
+  border-bottom: 2px solid #c0a16b;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #5b3b16;
+}
 
-    #choices {
-      margin-top: 40px;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
+#content {
+  font-size: 18px;
+  line-height: 1.7;
+  white-space: pre-line;
+  color: #333;
+}
 
-    .choice-btn {
-      flex: 1;
-      padding: 15px 20px;
-      background: linear-gradient(to bottom, #d3b98d, #b8935b);
-      border: 2px solid #8b5e3c;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+#choices {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between; /* ✅ 選項左右分散 */
+  gap: 20px;
+  flex-wrap: wrap; /* 支援 3~4 個選項時自動換行 */
+}
 
-    .choice-btn:hover {
-      background: linear-gradient(to bottom, #b8935b, #d3b98d);
-      color: #5b3b16;
-    }
+.choice-btn {
+  flex: 0 0 48%; /* ✅ 固定寬度，讓兩個選項左右排 */
+  padding: 15px 20px;
+  background: linear-gradient(to bottom, #d3b98d, #b8935b);
+  border: 2px solid #8b5e3c;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  text-align: center;
+}
 
-    /* 若只有一個選項時置中 */
-    .one-choice .choice-btn {
-      flex: unset;
-      width: 200px;
-      margin: 0 auto;
-    }
+.choice-btn:hover {
+  background: linear-gradient(to bottom, #b8935b, #d3b98d);
+  color: #5b3b16;
+}
   </style>
 </head>
 <body>

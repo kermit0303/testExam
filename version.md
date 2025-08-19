@@ -1,3 +1,6 @@
+V1.0.9
+ - [Improvement]調整排版
+
 V1.0.8
  - [Improvement]B醬的遊戲
 
