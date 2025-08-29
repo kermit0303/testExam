@@ -1,0 +1,64 @@
+body {
+  font-family: 'Noto Serif TC', serif;
+  margin: 0;
+  background: #faf8f4;
+  color: #333;
+}
+
+/* 工具列 */
+.toolbar {
+  background-color: #333;
+  padding: 10px 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.toolbar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.toolbar a:hover,
+.toolbar a.active {
+  background: #555;
+}
+
+.content {
+  padding: 20px;
+}
+
+.word {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+ruby {
+  ruby-position: over;
+  margin-right: 5px;
+}
+
+ruby rt {
+  font-size: 16px;
+  color: #888;
+}
+
+.chinese {
+  font-weight: bold;
+  margin-left: 15px;
+  font-size: 22px;
+  vertical-align: middle;
+  color: #4a4a4a;
+}
+
+.grammar h2 {
+  margin-top: 20px;
+  color: #1d3557;
+}
+
+.grammar p {
+  font-size: 18px;
+}

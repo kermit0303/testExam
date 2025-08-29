@@ -1,3 +1,13 @@
+V1.0.12
+ - [Improvement]修改資料夾架構
+ - [Improvement]新增日文的架構
+
+V1.0.11
+ - [BugFix]測試嵌入式方式，使多個功能併在一起
+
+V1.0.10
+ - [BugFix]調整文字大小
+
 V1.0.9
  - [Improvement]調整排版
 
