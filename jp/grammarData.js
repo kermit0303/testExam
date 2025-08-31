@@ -1,6 +1,6 @@
 const grammarData = [
   {
-    "tile": "a. い形容詞 - (肯定型) ～いです。",
+    "tile": "a. い形容詞 - (肯定型)[br1] ～いです。",
     "desp": "",
     "trans": "",
     "exam": [
@@ -16,7 +16,8 @@ const grammarData = [
       ]
       },
     ],
-    "visl": ""
+    "visl": "",
+    "br1": ['1','2']
   },
   {
     "tile": "b. な形容詞 - (肯定型) ～です。",

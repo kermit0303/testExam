@@ -8,8 +8,28 @@ function renderFurigana(jpArr) {
   }).join('');
 }
 
-function renderTagged(text) {
-  return text.replace(/\[\[(\w+)\|([^\]]+)\]\]/g, (_, cls, txt) => {
+function renderTagged(text, item) {
+  if (typeof text !== 'string') return text;
+
+  // 第 1 段：展開 [key] -> item[key]
+  let expanded = text.replace(/\[(\w+)\]/g, (_, key) => {
+    if (!item) return `[${key}]`;
+    const v = item[key];
+    if (Array.isArray(v)) {
+      // 改成每個元素換行
+      return v.map(String).join('<br/>');
+    }
+    if (typeof v === 'string' || typeof v === 'number') return String(v);
+    return `[${key}]`; // 沒對應就保留原樣
+  });
+
+  // 第 2 段：處理 [[class|text]]
+  return renderTaggedText(expanded);
+}
+
+function renderTaggedText(text) {
+  if (typeof text !== 'string') return text;
+  return text.replace(/\[\[([\w-]+)\|([^\]]+)\]\]/g, (_, cls, txt) => {
     return `<span class="${cls}">${txt}</span>`;
   });
 }
@@ -116,19 +136,19 @@ grammarData.forEach((item, idx) => {
   section.id = id;
 
   const h2 = document.createElement('h2');
-  h2.innerHTML = item.tile;
+  h2.innerHTML = renderTagged(item.tile,item);
   section.appendChild(h2);
 
   
   if (item.desp) {
     const desc = document.createElement('p');
-    desc.innerHTML = renderTagged(item.desp);
+    desc.innerHTML = renderTagged(item.desp,item);
     section.appendChild(desc);
   }
   if (item.trans) {
     const zh = document.createElement('div');
     zh.className = 'line-zh';
-    zh.textContent = renderTagged(item.trans);
+    zh.textContent = renderTagged(item.trans,item);
     section.appendChild(zh);
   }
 
@@ -151,12 +171,12 @@ grammarData.forEach((item, idx) => {
       ex.dia.forEach(d => {
         const jp = document.createElement('p');
         jp.className = 'exam-jp';
-        jp.innerHTML = renderTagged(renderFurigana(d.jp));
+        jp.innerHTML = renderTagged(renderFurigana(d.jp),item);
         exampleBlock.appendChild(jp);
 
         const zh = document.createElement('p');
         zh.className = 'exam-zh';
-        zh.innerHTML = renderTagged(d.zh);
+        zh.innerHTML = renderTagged(d.zh,item);
         exampleBlock.appendChild(zh);
       });
 
