@@ -1,3 +1,19 @@
+function renderFurigana(jpArr) {
+  return jpArr.map(token => {
+    if (token.f) {
+      return `<ruby>${token.k}<rt>${token.f}</rt></ruby>`;
+    } else {
+      return token.k;
+    }
+  }).join('');
+}
+
+function renderTagged(text) {
+  return text.replace(/\[\[(\w+)\|([^\]]+)\]\]/g, (_, cls, txt) => {
+    return `<span class="${cls}">${txt}</span>`;
+  });
+}
+
 
 function generateVisual(name){
   if(name === 'example-flow'){
@@ -19,7 +35,7 @@ function generateVisual(name){
       const div = document.createElement('div');
       div.className = 'node';
       div.id = text;
-      div.innerText = text;
+      div.innerHTML = text;
       div.style.position = 'absolute';
       div.style.top = '50px';
       div.style.left = `${50 + i*200}px`;
@@ -35,7 +51,7 @@ function generateVisual(name){
     // 標籤
     const label = document.createElement('div');
     label.className = 'label';
-    label.innerText = '繞過 B 的情況';
+    label.innerHTML = '繞過 B 的情況';
     label.style.position = 'absolute';
     label.style.top = '10px';
     label.style.left = '50%';
@@ -81,18 +97,17 @@ function generateVisual(name){
   }
   return null;
 }
-
 const categoryList = document.getElementById('category-list');
 const grammarContent = document.getElementById('grammar-content');
 
-grammarData.forEach((item, idx)=>{
-  const id = 'section-'+idx;
+grammarData.forEach((item, idx) => {
+  const id = 'section-' + idx;
 
   // 左側側欄
   const li = document.createElement('li');
   const a = document.createElement('a');
   a.href = '#' + id;
-  a.innerText = item.title;
+  a.innerHTML = item.tile;
   li.appendChild(a);
   categoryList.appendChild(li);
 
@@ -101,26 +116,50 @@ grammarData.forEach((item, idx)=>{
   section.id = id;
 
   const h2 = document.createElement('h2');
-  h2.innerText = item.title;
+  h2.innerHTML = item.tile;
   section.appendChild(h2);
 
-  const desc = document.createElement('p');
-  desc.innerText = item.description;
-  section.appendChild(desc);
+  
+  if (item.desp) {
+    const desc = document.createElement('p');
+    desc.innerHTML = renderTagged(item.desp);
+    section.appendChild(desc);
+  }
+  if (item.trans) {
+    const zh = document.createElement('div');
+    zh.className = 'line-zh';
+    zh.textContent = renderTagged(item.trans);
+    section.appendChild(zh);
+  }
 
-  const example = document.createElement('p');
-  example.innerText = item.example;
-  section.appendChild(example);
+  if (Array.isArray(item.exam)) {
+    const exContainer = document.createElement('div');
+    exContainer.className = 'examples';
+
+    item.exam.forEach(ex => {
+      const jp = document.createElement('p');
+      jp.className = 'exam-jp';
+      // ✅ 用 renderFurigana 處理 jp 陣列
+      jp.innerHTML = Array.isArray(ex.jp) ? renderTagged(renderFurigana(ex.jp)) : ex.jp;
+      exContainer.appendChild(jp);
+
+      const zh = document.createElement('p');
+      zh.className = 'exam-zh';
+      zh.innerHTML = renderTagged(ex.zh);
+      exContainer.appendChild(zh);
+    });
+
+    section.appendChild(exContainer);
+  }
 
   // visual
-  if(item.visual){
-  const container = document.createElement('div');
-  container.className = 'svg-container';
-
-  const visual = generateVisual(item.visual); // 回傳 DOM 元素
-  if (visual) container.appendChild(visual);   // 直接 append
-  section.appendChild(container);
-}
+  if (item.visl) {
+    const container = document.createElement('div');
+    container.className = 'svg-container';
+    const visual = generateVisual(item.visl);
+    if (visual) container.appendChild(visual);
+    section.appendChild(container);
+  }
 
   grammarContent.appendChild(section);
 });
@@ -130,11 +169,11 @@ function search(keyword){
   keyword = keyword.toLowerCase();
   const sections = document.querySelectorAll('.main section');
   const highlights = document.querySelectorAll('.highlight');
-  highlights.forEach(h=>{ h.outerHTML = h.innerText; });
+  highlights.forEach(h=>{ h.outerHTML = h.innerHTML; });
   if(!keyword) return;
 
   for(const section of sections){
-    const text = section.innerText.toLowerCase();
+    const text = section.innerHTML.toLowerCase();
     if(text.includes(keyword)){
       section.scrollIntoView({behavior:'smooth', block:'start'});
       const regex = new RegExp(`(${keyword})`, 'i');

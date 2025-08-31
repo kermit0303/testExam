@@ -27,7 +27,7 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const page = urlParams.get("page") || "game1"; // 預設為 game1
+    const page = urlParams.get("page") || "jp"; // 預設為 game1
 
     // 動態設置 iframe 的 src
     document.getElementById("gameFrame").src = `${page}/${page}.html`;

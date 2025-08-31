@@ -1,3 +1,8 @@
+
+V1.0.13
+ - [Improvement]修改重點顯示
+ - [Improvement]測試文法
+
 V1.0.12
  - [Improvement]修改資料夾架構
  - [Improvement]新增日文的架構
