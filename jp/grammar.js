@@ -7,25 +7,30 @@ function renderFurigana(jpArr) {
     }
   }).join('');
 }
-
 function renderTagged(text, item) {
   if (typeof text !== 'string') return text;
 
-  // 第 1 段：展開 [key] -> item[key]
   let expanded = text.replace(/\[(\w+)\]/g, (_, key) => {
-    if (!item) return `[${key}]`;
+    if (!item || !(key in item)) return `[${key}]`;
+
     const v = item[key];
+
     if (Array.isArray(v)) {
-      // 改成每個元素換行
-      return v.map(String).join('<br/>');
+      // 用 .option-box 包起來
+      const inner = v.map(val => `<div>${val}</div>`).join('');
+      return `<div class="option-box">${inner}</div>`;
     }
-    if (typeof v === 'string' || typeof v === 'number') return String(v);
-    return `[${key}]`; // 沒對應就保留原樣
+
+    if (typeof v === 'string' || typeof v === 'number') {
+      return String(v);
+    }
+
+    return `[${key}]`; // 預設保留原樣
   });
 
-  // 第 2 段：處理 [[class|text]]
   return renderTaggedText(expanded);
 }
+
 
 function renderTaggedText(text) {
   if (typeof text !== 'string') return text;
