@@ -7,21 +7,66 @@
 <style>
 .inbody { margin:0; font-family:'Noto Serif TC', serif; display:flex; height:100vh; overflow:hidden; background:#faf8f4; color:#333; }
 .sidebar { width:240px; background:#f5f1e9; padding:30px 20px; overflow-y:auto; border-right:1px solid #ddd; }
-.sidebar h2 { font-size:24px; margin-bottom:30px; font-weight:700; color:#4a4a4a; }
+.sidebar h2 { font-size:24px;font-weight:700; color:#4a4a4a; }
 .sidebar ul { list-style:none; padding:0; }
 .sidebar li { margin-bottom:18px; }
 .sidebar a { text-decoration:none; color:#5b5b5b; padding:10px 15px; display:block; border-radius:6px; font-size:18px; font-weight:600; transition:0.3s; }
 .sidebar a:hover { background:#d8e2dc; color:#3b6978; }
 
 .main { flex:1; padding:40px 50px; overflow-y:auto; position:relative; background:#fff; border-radius:8px; box-shadow:inset 0 0 20px rgba(0,0,0,0.03); }
-.search-box { position:sticky; top:0; background:#fff; z-index:10; box-shadow:0 2px 5px rgba(0,0,0,0.05); border-radius:8px; margin-bottom:20px; }
-.search-box input { width:100%; padding:14px 18px; font-size:20px; border:2px solid #ccc; border-radius:10px; }
-.search-box input:focus { outline:none; border-color:#3b6978; box-shadow:0 0 6px #3b6978aa; }
+.top-bar {
+  display: flex;
+  align-items: center;   /* 垂直置中 */
+  gap: 12px;             /* 按鈕與搜尋框之間的間距 */
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 20;
+  padding: 10px;  
+  background: none;   /* 移除背景色 */
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* 調整按鈕 */
+#toggle-sidebar {
+    background: none;   /* 移除背景色 */
+
+  padding: 10px 16px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* 調整搜尋框 */
+.search-box {
+  flex: 1;   /* 讓搜尋框自動填滿剩下的空間 */
+}
+
+.search-box input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+section h2 {
+  color:#1d3557;
+  margin: 12px 0;  /* 上下間距，可依需求調整 */
+  line-height: 1.4; /* 緊湊一點 */
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #3b6978;
+  box-shadow: 0 0 6px #3b6978aa;
+}
 
 .highlight { background:#ffd54f; font-weight:700; border-radius:3px; padding:0 2px; }
-section { scroll-margin-top:120px; margin-bottom:60px; font-size:22px; line-height:1.8; color:#444; }
-section h2 { margin-top:70px; color:#1d3557; }
-section p { margin:12px 0; }
+section { scroll-margin-top:120px; margin:10px; font-size:22px; line-height:1.8; color:#444; }
+section p { margin:12px 0;}
 
 .yellow {
   color: #f5dd08; /* 黃色，比背景 #ffd54f 更亮 */
@@ -32,8 +77,64 @@ section p { margin:12px 0; }
   color: #4fc3f7; /* 淺藍，跟背景形成對比 */
   font-weight: bold;
 }
+.space {
+  color: #246a8a; /* 淺藍，跟背景形成對比 */
+  font-weight: bold;
+  letter-spacing: 0.3em; /* 每個字左右增加間距，可調整數值 */
+}
+@media (max-width: 768px) {
+  .inbody {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .sidebar.show {
+    max-height: 300px; /* 或依實際內容調整 */
+  }
+  .main {
+    padding: 20px;
+  }
+  .toolbar a {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+.sidebar {
+  display: none;
+}
 
+/* 顯示的時候 */
+.sidebar.show {
+  display: block;
+}
+/* 分類按鈕樣式 */
+#toggle-sidebar {
+  color: rgb(236, 159, 15);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.example-block {
+  margin: 10px;
+  padding: 5px;
+  border-left: 4px solid #50badd; /* 左側色條做標記 */
+  background: #fafafa;            /* 淡背景分隔 */
+  border-radius: 6px;
+}
 
+.example-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #3b6978;
+}
 /* SVG container */
 .svg-container { position:relative; width:100%; max-width:600px; height:180px; margin-top:20px; background:#fff; border-radius:8px; box-shadow:inset 0 0 20px rgba(0,0,0,0.03); padding:20px 0; }
 .svg-container .node { position:absolute; padding:10px 16px; background:#f5f1e9; border:1.5px solid #d8e2dc; border-radius:6px; font-weight:bold; color:#333; box-shadow:1px 1px 5px rgba(0,0,0,0.05); }
@@ -45,6 +146,7 @@ section p { margin:12px 0; }
   <div class="toolbar">
     <a href="vocab.html">詞彙</a>
     <a href="grammar.html" class="active">文法</a>
+
   </div>
 <div class="inbody">
 <div class="sidebar">
@@ -53,9 +155,12 @@ section p { margin:12px 0; }
 </div>
 
 <div class="main">
+  <div class="top-bar">
+  <button id="toggle-sidebar">☰</button>
   <div class="search-box">
     <input type="text" placeholder="搜尋文法關鍵詞…" oninput="search(this.value)">
   </div>
+</div>
   <div id="grammar-content"></div>
 </div>
 </div>

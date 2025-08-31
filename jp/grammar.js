@@ -137,18 +137,31 @@ grammarData.forEach((item, idx) => {
     exContainer.className = 'examples';
 
     item.exam.forEach(ex => {
-      const jp = document.createElement('p');
-      jp.className = 'exam-jp';
-      // ✅ 用 renderFurigana 處理 jp 陣列
-      jp.innerHTML = Array.isArray(ex.jp) ? renderTagged(renderFurigana(ex.jp)) : ex.jp;
-      exContainer.appendChild(jp);
+      // 使用 div 來當範例區塊
+      const exampleBlock = document.createElement('div');
+      exampleBlock.className = 'example-block';
 
-      const zh = document.createElement('p');
-      zh.className = 'exam-zh';
-      zh.innerHTML = renderTagged(ex.zh);
-      exContainer.appendChild(zh);
+      // 標題文字放在區塊內，但不使用 h3
+      const title = document.createElement('div');
+      title.className = 'example-title';
+      title.textContent = `範例 ${ex.id}`;
+      exampleBlock.appendChild(title);
+
+      // 對話
+      ex.dia.forEach(d => {
+        const jp = document.createElement('p');
+        jp.className = 'exam-jp';
+        jp.innerHTML = renderTagged(renderFurigana(d.jp));
+        exampleBlock.appendChild(jp);
+
+        const zh = document.createElement('p');
+        zh.className = 'exam-zh';
+        zh.innerHTML = renderTagged(d.zh);
+        exampleBlock.appendChild(zh);
+      });
+
+      exContainer.appendChild(exampleBlock);
     });
-
     section.appendChild(exContainer);
   }
 
@@ -182,3 +195,12 @@ function search(keyword){
     }
   }
 }
+const toggleBtn = document.getElementById('toggle-sidebar');
+const sidebar = document.querySelector('.sidebar');
+
+// 初始狀態 sidebar 是隱藏的
+sidebar.classList.remove('show');
+
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('show');
+});

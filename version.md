@@ -1,4 +1,7 @@
 
+V1.0.14
+ - [Improvement]新增8/5文法
+
 V1.0.13
  - [Improvement]修改重點顯示
  - [Improvement]測試文法
