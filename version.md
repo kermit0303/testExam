@@ -1,3 +1,7 @@
+V1.0.18
+ - [Improvement]新增8/12文法
+ - [Improvement]修改文字大小
+
 V1.0.17
  - [Improvement]修改文字大小
 

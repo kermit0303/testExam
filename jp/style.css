@@ -16,7 +16,7 @@ body {
 .toolbar a {
   color: #fff;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 32px;
   padding: 8px 12px;
   border-radius: 4px;
 }
@@ -40,7 +40,7 @@ ruby {
 }
 
 ruby rt {
-  font-size: 16px;
+  font-size: 26px;
   color: #888;
 }
 
@@ -83,13 +83,13 @@ ruby rt {
     /* 假名 */
     ruby > rt {
       color: #e67e22;       /* 橘色 */
-      font-size: 12px;
+      font-size: 18px;
       font-weight: normal;
     }
 
     /* 中文翻譯區塊 */
     .zh {
-      margin-top: 10px;
+      margin-top: 5px;
       font-size: 18px;
       color: #34495e;
     }

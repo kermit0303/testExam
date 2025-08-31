@@ -131,7 +131,7 @@ grammarData.forEach((item, idx) => {
   const li = document.createElement('li');
   const a = document.createElement('a');
   a.href = '#' + id;
-  a.innerHTML = item.tile;
+  a.innerHTML = renderTagged(item.tile,item);
   li.appendChild(a);
   categoryList.appendChild(li);
 
