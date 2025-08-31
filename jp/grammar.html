@@ -7,10 +7,10 @@
 <style>
 .inbody { margin:0; font-family:'Noto Serif TC', serif; display:flex; height:100vh; overflow:hidden; background:#faf8f4; color:#333; }
 .sidebar { width:240px; background:#f5f1e9; padding:30px 20px; overflow-y:auto; border-right:1px solid #ddd; }
-.sidebar h2 { font-size:24px;font-weight:700; color:#4a4a4a; }
+.sidebar h2 { font-size:36px;font-weight:700; color:#4a4a4a; }
 .sidebar ul { list-style:none; padding:0; }
 .sidebar li { margin-bottom:18px; }
-.sidebar a { text-decoration:none; color:#5b5b5b; padding:10px 15px; display:block; border-radius:6px; font-size:18px; font-weight:600; transition:0.3s; }
+.sidebar a { text-decoration:none; color:#5b5b5b; padding:10px 15px; display:block; border-radius:6px; font-size:26px; font-weight:600; transition:0.3s; }
 .sidebar a:hover { background:#d8e2dc; color:#3b6978; }
 
 .main { flex:1; padding:40px 50px; overflow-y:auto; position:relative; background:#fff; border-radius:8px; box-shadow:inset 0 0 20px rgba(0,0,0,0.03); }
@@ -33,7 +33,7 @@
     background: none;   /* 移除背景色 */
 
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 30px;
   border: none;
   border-radius: 8px;
   color: #fff;
@@ -48,7 +48,7 @@
 .search-box input {
   width: 100%;
   padding: 12px 16px;
-  font-size: 18px;
+  font-size: 26px;
   border: 2px solid #ccc;
   border-radius: 8px;
 }
@@ -65,7 +65,7 @@ section h2 {
 }
 
 .highlight { background:#ffd54f; font-weight:700; border-radius:3px; padding:0 2px; }
-section { scroll-margin-top:120px; margin:10px; font-size:22px; line-height:1.8; color:#444; }
+section { scroll-margin-top:120px; margin:10px; font-size:30px; line-height:1.8; color:#444; }
 section p { margin:12px 0;}
 
 .yellow {
@@ -125,7 +125,7 @@ section p { margin:12px 0;}
   border: none;
   border-radius: 6px;
   padding: 8px 14px;
-  font-size: 16px;
+  font-size: 30px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -138,23 +138,24 @@ section p { margin:12px 0;}
 }
 
 .example-title {
-  font-size: 16px;
+  font-size: 30px;
   font-weight: 600;
   margin-bottom: 8px;
   color: #3b6978;
 
 }
-.option-box {
-    border: 2px solid #ccc;
-    border-left: 6px solid #4CAF50;
+
+  .option-box {
+    display: inline-block;  /* 整個框框跟文字在同一行 */
+    border-left: 3px solid #333;  /* 左大括弧效果 */
     background: #fff;
-    border-radius: 8px;
-    padding: 0.5em 1em;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 0.3em;
-    width: 100px;
+    border-radius: 12px;
+    padding: 0.3em 0.3em;
+    margin: 0 2px;
+    vertical-align: middle;
+  }
+  .option-box div {
+    line-height: 1.2;  /* 每個選項換行間距 */
   }
 /* SVG container */
 .svg-container { position:relative; width:100%; max-width:600px; height:180px; margin-top:20px; background:#fff; border-radius:8px; box-shadow:inset 0 0 20px rgba(0,0,0,0.03); padding:20px 0; }

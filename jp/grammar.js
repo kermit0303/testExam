@@ -16,9 +16,8 @@ function renderTagged(text, item) {
     const v = item[key];
 
     if (Array.isArray(v)) {
-      // 用 .option-box 包起來
       const inner = v.map(val => `<div>${val}</div>`).join('');
-      return `<div class="option-box">${inner}</div>`;
+      return `<span class="option-box">${inner}</span>`; // 外層用 span
     }
 
     if (typeof v === 'string' || typeof v === 'number') {

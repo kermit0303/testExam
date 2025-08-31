@@ -1,3 +1,11 @@
+V1.0.17
+ - [Improvement]修改文字大小
+
+V1.0.16
+ - [Improvement]修改括弧排版
+
+V1.0.15
+ - [Improvement]新增跨行問題
 
 V1.0.14
  - [Improvement]新增8/5文法
