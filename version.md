@@ -1,3 +1,6 @@
+V1.0.22
+ - [Improvement]新增版本號
+
 V1.0.21
  - [BugFix] 修復單字
 
