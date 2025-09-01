@@ -1,3 +1,6 @@
+V1.0.20
+ - [BugFix] 調整html get 條件
+
 V1.0.19
  - [Improvement]新增8/12文法 完整版
 
