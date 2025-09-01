@@ -1,16 +1,16 @@
 const container = document.getElementById('word-list');
 
 vocab.forEach(item => {
-  const rubyHTML = item.japanese.map(char => {
-    if (char.furigana) {
-      return `<ruby>${char.kanji}<rt>${char.furigana}</rt></ruby>`;
+  const rubyHTML = item.jp.map(char => {
+    if (char.f) {
+      return `<ruby>${char.k}<rt>${char.f}</rt></ruby>`;
     } else {
-      return `<ruby>${char.kanji}</ruby>`;
+      return `<ruby>${char.k}</ruby>`;
     }
   }).join('');
 
   const div = document.createElement('div');
   div.className = 'word';
-  div.innerHTML = `${rubyHTML}<span class="chinese"> — ${item.chinese}</span>`;
+  div.innerHTML = `${rubyHTML}<span class="chinese"> — ${item.zh}</span>`;
   container.appendChild(div);
 });

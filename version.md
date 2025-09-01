@@ -1,3 +1,6 @@
+V1.0.21
+ - [BugFix] 修復單字
+
 V1.0.20
  - [BugFix] 調整html get 條件
 
