@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>冒險故事框架</title>
+  <title>電子郵件-研究中心</title>
   <style>
     body {
       margin: 0;
@@ -27,7 +27,7 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const page = (urlParams.get("page") || "jp").replace(/['"]/g, ''); // 去除引號
+    const page = (urlParams.get("page") || "game1").replace(/['"]/g, ''); // 去除引號
 
     // 動態設置 iframe 的 src
     document.getElementById("gameFrame").src = `${page}/${page}.html`;

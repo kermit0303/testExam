@@ -1,3 +1,6 @@
+V1.0.23
+ - [Improvement]新架構
+
 V1.0.22
  - [Improvement]新增版本號
 
