@@ -321,6 +321,7 @@ function renderGrammarItem(item, batchIndex, idx) {
     }
 
     grammarContent.appendChild(section);
+
 }
 
 // ========= 滾動監聽，滾動到底部時載入下一批 =========
@@ -335,6 +336,7 @@ window.addEventListener('scroll', () => {
 // ========= 頁面初始化 =========
 preloadTitles();
 loadBatch(currentBatch);
+
 
 // ========= 搜尋功能 =========
 function search(keyword) {

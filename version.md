@@ -1,3 +1,6 @@
+V1.0.24
+ - [Improvement]新增句子
+
 V1.0.23
  - [Improvement]新架構
 
