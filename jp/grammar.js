@@ -14,7 +14,6 @@ function renderTagged(text, item) {
 
     let expanded = text.replace(/\[(\w+)\]/g, (_, key) => {
         if (!item || !(key in item)) return `[${key}]`;
-
         const v = item[key];
 
         if (Array.isArray(v)) {
@@ -29,15 +28,77 @@ function renderTagged(text, item) {
         return `[${key}]`;
     });
 
-    return renderTaggedText(expanded);
-}
-
-function renderTaggedText(text) {
+    return renderTaggedText(expanded, item); 
+} 
+function renderTaggedText(text, item = {}) {
     if (typeof text !== 'string') return text;
-    return text.replace(/\[\[([\w-]+)\|([^\]]+)\]\]/g, (_, cls, txt) => {
+
+    return text.replace(/\[\[([\w-]+)\|((?:[^\[\]]|\[[^\[\]]*\])*)\]\]/g, (_, cls, txt) => {
+        if (cls.trim() === "notetop") {
+            console.log('renderTagged text:', text);
+            console.log('renderTagged txt:', txt);
+            
+            // 這裡改用從尾部找 [] 的 regex
+            const match = txt.match(/^\[(\w+)\]$/);
+            console.log('renderTagged match:', match);
+
+            if (match) {
+                const key = match[1];
+                const value = item["note"][key];
+                return renderTextWithNote(value ?? `[${key}]`);
+            }
+
+            return renderTextWithNote(txt);
+        }
+
         return `<span class="${cls}">${txt}</span>`;
     });
 }
+
+function renderTextWithNote(noteText) {
+    let content;
+
+    if (Array.isArray(noteText)) {
+        content = renderFurigana(noteText);  // 假名顯示
+    } else {
+        content = noteText;  // 純文字顯示
+    }
+
+    return `
+        <span class="note-top">
+            <div class="note-box-top">${content}</div>
+            <svg class="note-arrow" xmlns="http://www.w3.org/2000/svg">
+                <line x1="15" y1="-60" x2="-20" y2="-30"
+                    stroke="#c8a98b"
+                    stroke-width="2"
+                    marker-end="url(#global-note-arrowhead)" />
+            </svg>
+        </span>
+    `;
+}
+
+
+
+
+
+function insertGlobalNoteMarker() {
+    if (document.getElementById('global-note-marker')) return; // 已經插入就跳過
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", "height:0;width:0;position:absolute");
+    svg.innerHTML = `
+        <defs>
+            <marker id="global-note-arrowhead" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+                <polygon points="0 0, 6 3, 0 6" fill="#c8a98b" />
+            </marker>
+        </defs>
+    `;
+    svg.id = 'global-note-marker';
+    document.body.appendChild(svg);
+}
+
+
+
 
 function generateVisual(name) {
     if (name === 'example-flow') {
@@ -334,6 +395,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ========= 頁面初始化 =========
+insertGlobalNoteMarker();  
 preloadTitles();
 loadBatch(currentBatch);
 

@@ -1,3 +1,7 @@
+V1.0.25
+ - [Improvement]新增爸的體重
+ - [Improvement]新增備註模組
+
 V1.0.24
  - [Improvement]新增句子
 
