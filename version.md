@@ -1,3 +1,6 @@
+V1.0.26
+ - [BugFix]爸的體重 chart 格式
+
 V1.0.25
  - [Improvement]新增爸的體重
  - [Improvement]新增備註模組
