@@ -1,8 +1,8 @@
 body {
-  font-family: 'Noto Serif TC', serif;
-  margin: 0;
-  background: #faf8f4;
-  color: #333;
+    font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo','Noto Serif TC', sans-serif;
+    margin: 0;
+    background: #faf8f4;
+    color: #333;
 }
 
 /* 工具列 */
@@ -61,36 +61,105 @@ ruby rt {
   font-size: 26px;
 }
 
-    body {
-      font-family: "Hiragino Mincho Pro", "Yu Mincho", "MS Mincho", serif;
-      font-size: 20px;
-      line-height: 2;
-      padding: 20px;
-      background: #fdfdfd;
+body {
+  font-family: "Hiragino Mincho Pro", "Yu Mincho", "MS Mincho", serif;
+  font-size: 20px;
+  line-height: 2;
+  padding: 20px;
+  background: #fdfdfd;
+}
+
+ruby {
+  ruby-align: center;
+}
+
+/* 漢字主體 */
+ruby>rb {
+  color: #2c3e50;
+  /* 深藍灰 */
+  font-weight: bold;
+  font-size: 22px;
+  padding: 0 2px;
+}
+
+/* 假名 */
+ruby>rt {
+  color: #e67e22;
+  /* 橘色 */
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* 中文翻譯區塊 */
+.zh {
+  margin-top: 5px;
+  font-size: 18px;
+  color: #34495e;
+}
+.small {
+    font-size: 70%; /* 調整促音大小，60% 可依需求調整 */
+    display: inline-block;
+    line-height: 1;
+}
+.table-jp {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 36px;
+    color: #5a5145; /* 柔和棕灰文字 */
+    background: #fbf9f3; /* 超淡米白背景 */
+    margin: 20px 0;
+    box-shadow: 0 3px 10px rgba(195, 180, 160, 0.12); /* 溫和棕色陰影 */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .table-jp th,
+    .table-jp td {
+        padding: 16px 24px;
+        border-bottom: 1px solid #ded6c8; /* 淡米色邊框 */
+        text-align: left;
     }
 
-    ruby {
-      ruby-align: center;
+    .table-jp thead {
+        background-color: #f2e9db; /* 柔和米棕色調 */
+        color: #7a6f5a; /* 中度棕色 */
+        font-weight: 700;
+        font-size: 38px;
+        border-bottom: 3px solid #c7b89a; /* 深米棕色邊框 */
     }
 
-    /* 漢字主體 */
-    ruby > rb {
-      color: #2c3e50;       /* 深藍灰 */
-      font-weight: bold;
-      font-size: 22px;
-      padding: 0 2px;
+    .table-jp tbody tr:nth-child(odd) {
+        background-color: #fffefb; /* 幾乎純白 */
     }
 
-    /* 假名 */
-    ruby > rt {
-      color: #e67e22;       /* 橘色 */
-      font-size: 18px;
-      font-weight: normal;
+    .table-jp tbody tr:nth-child(even) {
+        background-color: #f9f6ee; /* 極淡米色 */
     }
 
-    /* 中文翻譯區塊 */
-    .zh {
-      margin-top: 5px;
-      font-size: 18px;
-      color: #34495e;
+    .table-jp tbody tr:hover {
+        background-color: #e7dfd1; /* 柔和米棕，hover */
+        cursor: pointer;
     }
+
+    .table-jp caption {
+        caption-side: top;
+        padding: 14px 0;
+        font-size: 44px;
+        font-weight: 700;
+        color: #5a533f; /* 溫潤棕綠 */
+        text-align: center;
+        font-family: 'Noto Serif TC', serif;
+    }
+
+.kana {
+    font-size: 30px;
+    fill: #6e9c74; /* 青藍色 */
+    font-family: 'Noto Serif JP', serif;
+}
+
+.kanji {
+    font-size: 40px;
+    fill: #1d3557; /* 深灰色 */
+    font-family: 'Noto Serif JP', serif;
+}
