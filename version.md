@@ -4,6 +4,9 @@
 
  6/24 影片先看一下
 
+V1.0.32
+- [Improvement]新增version共用
+- [Improvement]新增func.js共用
 
 V1.0.31
 - [Improvement]新增jptest 之後公開後，以此先當測試版
