@@ -28,7 +28,7 @@ function renderTagged(text, item) {
     return `[${key}]`;
   });
   return renderTaggedText(expanded, item);
-}
+} 
 function renderTaggedText(text, item = {}) {
   if (typeof text !== 'string') return text;
 
@@ -412,7 +412,7 @@ function renderCell(cell) {
   if (typeof cell === "string") {
     const trimmed = cell.trim();
     if ((trimmed.startsWith("{") && trimmed.endsWith("}")) ||
-      (trimmed.startsWith("[") && trimmed.endsWith("]"))) {
+        (trimmed.startsWith("[") && trimmed.endsWith("]"))) {
       try {
         const parsed = JSON.parse(trimmed);
         return renderCell(parsed); // 再遞迴一次，交給物件/陣列處理
@@ -634,14 +634,13 @@ function renderGrammarItem(item, batchIndex, idx) {
     section.appendChild(container);
   }
 
-  if (item.tables && Array.isArray(item.tables)) {
-    item.tables.forEach(table => {
-      const tableHTML = renderTagged(renderTable(table), item); // 傳入單一表格
-      const wrapper = document.createElement('div');
-      wrapper.innerHTML = tableHTML;
-      section.appendChild(wrapper);
-    });
+  if (item.table) {
+    const tableHTML = renderTagged(renderTable(item.table), item); // 呼叫渲染函式（建議用 innerHTML）
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = tableHTML;
+    section.appendChild(wrapper);
   }
+
   grammarContent.appendChild(section);
 }
 

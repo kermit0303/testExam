@@ -4,6 +4,11 @@
 
  6/24 影片先看一下
 
+
+V1.0.31
+- [Improvement]新增jptest 之後公開後，以此先當測試版
+- [Improvement]完成筆記 6/10
+
 V1.0.30
 - [Improvement]6/10整理到一半 先確定table排版
 

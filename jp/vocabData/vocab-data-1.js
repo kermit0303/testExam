@@ -1,4 +1,4 @@
-const vocab = [
+window.vocabData1 = [
   {
     "zh": "",
     "jp": [
