@@ -3,6 +3,10 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+
+V1.0.30
+- [Improvement]6/10整理到一半 先確定table排版
+
 V1.0.29
 - [Improvement]完成筆記 7/29 7/22 7/15 7/8 6/10整理到一半
 - [Improvement]新增小字 small css
