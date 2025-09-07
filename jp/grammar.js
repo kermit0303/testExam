@@ -138,6 +138,7 @@ function renderGrammarItem(item, batchIndex, idx) {
   // 處理說明段落（desp）
   if (item.desp) {
     const desc = document.createElement('p');
+    desc.className = 'line-zh';
     if (Array.isArray(item.desp)) {
       desc.innerHTML = renderTagged(renderFurigana(item.desp), item);
     } else {

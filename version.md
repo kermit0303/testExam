@@ -4,6 +4,11 @@
 
  6/24 影片先看一下
 
+V1.0.33
+- [Improvement]合併爸之前考試工具
+- [Improvement]合併菜單的excel
+- [Improvement]新增紀錄功能 記錄到7/29
+
 V1.0.32
 - [Improvement]新增version共用
 - [Improvement]新增func.js共用

@@ -230,7 +230,7 @@
     }
 
     .example-block {
-      margin: 10px;
+      margin: 20px;
       padding: 5px;
       border-left: 4px solid #7a9e7e;
       /* 柔和綠 */
@@ -243,6 +243,34 @@
       font-weight: 600;
       margin-bottom: 8px;
       color: #40514e;
+    }
+
+    .line-zh {
+      color: #6b5b4b;
+      /* 柔棕色，更溫暖 */
+      font-weight: 500;
+      font-size: 34px;
+      line-height: 1.5;
+      margin: 6px 0;
+    }
+
+    .exam-zh {
+      color: #6b5b4b;
+      /* 柔棕色，比原本深灰溫暖 */
+      font-size: 34px;
+      /* 適中大小 */
+      line-height: 1.6;
+      /* 舒服行距 */
+      margin: 6px 0 12px 0;
+      /* 上下空間，避免緊貼其他元素 */
+      background: #fffdf8;
+      /* 米白色背景，更柔和 */
+      padding: 8px 12px;
+      /* 內距，文字不貼邊 */
+      border-radius: 8px;
+      /* 柔和圓角 */
+      box-shadow: 0 1px 4px rgba(160, 150, 130, 0.1);
+      /* 輕微陰影 */
     }
 
     .option-box {
@@ -308,40 +336,46 @@
       padding: 0 6px;
       border-radius: 50%;
     }
-      .note-top {
-          display: inline-block;
-          position: relative;
-          z-index: 0;
-          margin-top: 115px; /* ⭐ 預留空間，避免擋住上一排 */
-      }
 
-      .note-box-top {
-          position: absolute;
-          bottom: 100%; /* 放在文字上方 */
-          left: 0;
-          transform: translateY(-70px); /* 往上移 40px，確保不擋到本排文字 */
-          background: #fffae0;
-          border: 2px solid #e0c080;
-          border-radius: 6px;
-          padding: 2px 2px;
-          white-space: nowrap;
-          font-size: 24px;
-          pointer-events: none;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-          z-index: 99999;
-      }
+    .note-top {
+      display: inline-block;
+      position: relative;
+      z-index: 0;
+      margin-top: 115px;
+      /* ⭐ 預留空間，避免擋住上一排 */
+    }
 
-      .note-arrow {
-          position: absolute;
-          bottom: 100%;
-          left: -10px; /* 讓箭頭在備註框左下方 */
-          width: 20px;
-          height: 20px;
-          overflow: visible;
-          pointer-events: none;
-          z-index: 9999;
-          transform: translateY(-10px); /* 箭頭稍微往上，和備註框對齊 */
-      }
+    .note-box-top {
+      position: absolute;
+      bottom: 100%;
+      /* 放在文字上方 */
+      left: 0;
+      transform: translateY(-70px);
+      /* 往上移 40px，確保不擋到本排文字 */
+      background: #fffae0;
+      border: 2px solid #e0c080;
+      border-radius: 6px;
+      padding: 2px 2px;
+      white-space: nowrap;
+      font-size: 24px;
+      pointer-events: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      z-index: 99999;
+    }
+
+    .note-arrow {
+      position: absolute;
+      bottom: 100%;
+      left: -10px;
+      /* 讓箭頭在備註框左下方 */
+      width: 20px;
+      height: 20px;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translateY(-10px);
+      /* 箭頭稍微往上，和備註框對齊 */
+    }
 
 
     .arrow-svg {
@@ -352,15 +386,16 @@
     }
 
     /* SVG container */
-      .svg-container {
-          display: inline-block;
-          position: relative;
-          background: #fff;
-          border-radius: 8px;
-          box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
-          padding: 4px 8px;
-          vertical-align: text-top; /* 或 top 都可嘗試 */
-      }
+    .svg-container {
+      display: inline-block;
+      position: relative;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+      padding: 4px 8px;
+      vertical-align: text-top;
+      /* 或 top 都可嘗試 */
+    }
 
 
     .svg-container .node {
@@ -391,74 +426,71 @@
       marker-end: url(#arrow);
     }
 
-    
-  .containerUp {
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-    font-size: 4rem;
-    gap: 50px;
-  }
-  svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: visible;
-    pointer-events: none; /* 不影響文字互動 */
-  }
 
-.icon {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: inline-block;
-}
+    .containerUp {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      font-size: 4rem;
+      gap: 50px;
+    }
 
-/* ❌ 錯誤 icon - 紅圈 + 叉叉 */
-.error-icon {
-  border: 2px solid #e26a6a;
-}
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: visible;
+      pointer-events: none;
+      /* 不影響文字互動 */
+    }
+    .icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-block;
+    }
 
-.error-icon::before,
-.error-icon::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60%;
-  height: 2px;
-  background-color: #e26a6a;
-  transform-origin: center;
-}
+    .error-icon {
+      border: 2px solid #e26a6a;
+      position: relative;
+    }
 
-.error-icon::before {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
+    .error-icon::before,
+    .error-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60%;
+      height: 2px;
+      background-color: #e26a6a;
+    }
 
-.error-icon::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
+    .error-icon::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
 
-/* ✅ 正確 icon - 雙圈 */
-.success-icon {
-  border: 2px solid #6abf69;
-  /* 外圈 */
-}
+    .error-icon::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
 
-.success-icon::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 14px;
-  height: 14px;
-  border: 2px solid #6abf69;
-  /* 內圈 */
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-      
+    .success-icon {
+      border: 2px solid #6abf69;
+      position: relative;
+    }
+
+    .success-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #6abf69;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
   </style>
 </head>
 
@@ -466,7 +498,8 @@
   <div class="toolbar">
     <a href="vocab.html">単語</a>
     <a href="grammar.html" class="active">文型</a>
-    <p style="color: #ccc;">V1.0.30</p>
+    <a href="record.html">記錄</a>
+    <p id="vid" style="color: #ccc;">V1.0.31</p>
   </div>
   <div class="inbody">
     <div class="sidebar">
@@ -484,6 +517,7 @@
       <div id="grammar-content"></div>
     </div>
   </div>
+  <script src="func.js"></script>
   <script src="grammar.js"></script>
 </body>
 
