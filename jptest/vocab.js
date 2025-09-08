@@ -1,6 +1,6 @@
 let currentPage = 1;
 let isLoading = false;
-
+let maxpage = 1;
 const container = document.getElementById('word-list');
 
 // 先建立一張大表
@@ -77,7 +77,8 @@ function appendVocabRows(data, columns = 3, caption = "") {
   table.className = "table-jp";
   if (caption) {
     const cap = document.createElement("caption");
-    cap.innerText = caption;
+    cap.innerHTML = renderMaybeFurigana(caption);
+
     table.appendChild(cap);
   }
   const tbody = document.createElement("tbody");
@@ -119,6 +120,17 @@ function appendVocabRows(data, columns = 3, caption = "") {
   container.appendChild(table);
 }
 
+function renderMaybeFurigana(textOrJson) {
+  try {
+    const arr = JSON.parse(textOrJson);
+    if (Array.isArray(arr)) {
+      return renderFurigana(arr);
+    }
+  } catch (e) {
+    // 不是 JSON 就跳過
+  }
+  return textOrJson;
+}
 
 
 // 第一次自動載入
@@ -134,7 +146,9 @@ window.addEventListener('scroll', () => {
 function loadNextVocabPage() {
   if (isLoading) return;
   isLoading = true;
-
+ if (currentPage > maxpage) {
+    return;
+  }
   const script = document.createElement('script');
   script.src = `vocabData/vocab-data-${currentPage}.js`;
 

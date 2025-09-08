@@ -992,7 +992,6 @@ window.grammarData1 = [
   },
   {
     "tile": [
-
       {
         "k": "敬體 - 基本體 (口語)"
       }

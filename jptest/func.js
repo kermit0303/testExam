@@ -13,46 +13,36 @@ function renderFurigana(jpArr) {
 
 function renderTagged(text, item) {
     if (typeof text !== 'string') return text;
-
     let expanded = text.replace(/\[(\w+)\]/g, (_, key) => {
         if (!item || !(key in item)) return `[${key}]`;
         const v = item[key];
-
         if (Array.isArray(v)) {
             const inner = v.map(val => {
                 try {
                     const parsed = JSON.parse(val);
                     if (Array.isArray(parsed)) {
-                        // ✅ 呼叫你的函式
                         return renderFurigana(parsed);
                     }
                 } catch (e) {
-                    // parse 失敗就當字串
                     return `<div>${val}</div>`;
                 }
                 return `<div>${val}</div>`;
             }).join('');
-
             return `<span class="option-box">${inner}</span>`;
         }
-
         if (typeof v === 'string' || typeof v === 'number') {
             return String(v);
         }
-
         return `[${key}]`;
     });
     return renderTaggedText(expanded, item);
 }
 function renderTaggedText(text, item = {}) {
     if (typeof text !== 'string') return text;
-
     const tagRegex = /\[\[([\w-]+)\|/g;
-
     function parse(str) {
         let result = '';
         let i = 0;
-
         while (i < str.length) {
             tagRegex.lastIndex = i;
             const match = tagRegex.exec(str);
@@ -134,10 +124,8 @@ function renderTaggedText(text, item = {}) {
             result += replaced;
             i = j;
         }
-
         return result;
     }
-
     return parse(text);
 }
 function renderTwoPitch(kanaArray) {
@@ -439,7 +427,7 @@ function renderCell(cell) {
         // 純文字或標記字串
         return renderTagged(cell);
     }
-
+    
     // 如果是 {k,f} 的物件
     if (typeof cell === "object" && "k" in cell) {
         return renderFurigana([cell]);
@@ -449,7 +437,6 @@ function renderCell(cell) {
     if (Array.isArray(cell) && cell.length && typeof cell[0] === "object" && "k" in cell[0]) {
         return renderFurigana(cell);
     }
-
     // 其他 → 強制轉字串
     return String(cell);
 }

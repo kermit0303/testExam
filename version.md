@@ -4,6 +4,10 @@
 
  6/24 影片先看一下
 
+V1.0.34
+- [BugFix]讓第一頁在grammerdata
+- [Improvement]新增單字的table caption可以有ruby支援
+
 V1.0.33
 - [Improvement]合併爸之前考試工具
 - [Improvement]合併菜單的excel
