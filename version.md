@@ -4,6 +4,15 @@
 
  6/24 影片先看一下
 
+V1.0.38
+- [BugFix] 優化效能
+
+V1.0.37
+- [BugFix] 文字大小
+
+V1.0.36
+- [BugFix] 文字大小
+
 V1.0.35
 - [Improvement] 修改排版
 - [Improvement] 調整架構

@@ -8,24 +8,23 @@ body {
 /* 工具列 */
 .toolbar {
   background-color: #333;
-  padding: 10px 20px;
+  padding: 12px 24px; /* 整體 toolbar padding 調大 */
   display: flex;
-  gap: 20px;
+  gap: 24px;          /* 按鈕間距增加 */
 }
 
 .toolbar a {
   color: #fff;
   text-decoration: none;
-  font-size: 32px;
-  padding: 8px 12px;
-  border-radius: 4px;
+  font-size: 36px;    /* 字體稍大 */
+  padding: 12px 16px; /* 按鈕區域變大，更好按 */
+  border-radius: 6px;
 }
 
 .toolbar a:hover,
 .toolbar a.active {
   background: #555;
 }
-
 .content {
   padding: 10px;
 }
