@@ -490,7 +490,7 @@ window.grammarData1 = [
                 "f": "た"
               },
               {
-                "k": "ぺ[[strike|ます]]たいです。"
+                "k": "べ　　[[strike|ます]]たいです。"
               }
             ],
             "zh": "想吃。"

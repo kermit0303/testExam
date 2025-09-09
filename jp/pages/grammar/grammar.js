@@ -1,5 +1,3 @@
-
-
 // ========= 左側與右側 DOM =========
 const categoryList = document.getElementById('category-list');
 const grammarContent = document.getElementById('grammar-content');
