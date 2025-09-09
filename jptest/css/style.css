@@ -3,21 +3,23 @@ body {
   margin: 0;
   background: #faf8f4;
   color: #333;
+  overflow: hidden; /* 這樣 body 就不會有滾軸了 */
 }
-
-/* 工具列 */
 .toolbar {
   background-color: #333;
-  padding: 12px 24px; /* 整體 toolbar padding 調大 */
+  padding: 12px 24px;
   display: flex;
-  gap: 24px;          /* 按鈕間距增加 */
+  align-items: center;
+  justify-content: flex-start; /* 或 space-between 看需求 */
+  position: relative;          /* 讓子元素絕對定位參考 */
+  height: 80px;                /* toolbar 高度，可調整 */
 }
 
 .toolbar a {
   color: #fff;
   text-decoration: none;
-  font-size: 36px;    /* 字體稍大 */
-  padding: 12px 16px; /* 按鈕區域變大，更好按 */
+  font-size: 32px;
+  padding: 12px 16px;
   border-radius: 6px;
 }
 
@@ -25,6 +27,16 @@ body {
 .toolbar a.active {
   background: #555;
 }
+
+#vid {
+  position: absolute;  /* 必須加 */
+  bottom: 5px;         /* 貼近底部 */
+  left: 50%;           /* 水平置中 */
+  transform: translateX(-50%); /* 調整水平置中 */
+  color: #ccc;
+  font-size: 18px;
+}
+
 .content {
   padding: 10px;
 }
@@ -39,11 +51,6 @@ ruby {
   font-size: 36px;
 }
 
-ruby>rt {
-  margin-top: 2px;
-  font-size: 22px;
-  color: #888;
-}
 
 .chinese {
   font-weight: bold;
@@ -58,16 +65,10 @@ ruby>rt {
 }
 
 .grammar p {
-  font-size: 22px;
+  font-size: 26px;
 }
 
-body {
-  font-family: "Hiragino Mincho Pro", "Yu Mincho", "MS Mincho", serif;
-  font-size: 20px;
-  line-height: 2;
-  padding: 20px;
-  background: #fdfdfd;
-}
+
 
 ruby {
   ruby-align: center;
@@ -78,7 +79,7 @@ ruby>rb {
   color: #2c3e50;
   /* 深藍灰 */
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
   padding: 0 2px;
 }
 
@@ -86,7 +87,7 @@ ruby>rb {
 ruby>rt {
   color: #e67e22;
   /* 橘色 */
-  font-size: 24px;
+  font-size: 18px;
   font-weight: normal;
 }
 

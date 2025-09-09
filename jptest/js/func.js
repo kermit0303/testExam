@@ -9,43 +9,42 @@ function renderFurigana(jpArr) {
         }
     }).join('');
 }
-// 統一處理標記文字
-function renderTagged(text, item = {}) {
+
+function renderTagged(text, item) {
     if (typeof text !== 'string') return text;
-
-    // 如果是 JSON 字串就先解析
-    const trimmed = text.trim();
-    if ((trimmed.startsWith("[") && trimmed.endsWith("]")) ||
-        (trimmed.startsWith("{") && trimmed.endsWith("}"))) {
-        try {
-            const parsed = JSON.parse(trimmed);
-            // [{k,f}, ...] 或 {k,f} → renderFurigana
-            if (Array.isArray(parsed) && parsed.length && "k" in parsed[0]) {
-                return renderFurigana(parsed);
-            } else if (typeof parsed === 'object' && "k" in parsed) {
-                return renderFurigana([parsed]);
-            }
-        } catch(e) {
-            // JSON 解析失敗，繼續當普通文字處理
+    let expanded = text.replace(/\[(\w+)\]/g, (_, key) => {
+        if (!item || !(key in item)) return `[${key}]`;
+        const v = item[key];
+        if (Array.isArray(v)) {
+            const inner = v.map(val => {
+                try {
+                    const parsed = JSON.parse(val);
+                    if (Array.isArray(parsed)) {
+                        return renderFurigana(parsed);
+                    }
+                } catch (e) {
+                    return `<div>${val}</div>`;
+                }
+                return `<div>${val}</div>`;
+            }).join('');
+            return `<span class="option-box">${inner}</span>`;
         }
-    }
-
-    return renderTaggedText(text, item);
+        if (typeof v === 'string' || typeof v === 'number') {
+            return String(v);
+        }
+        return `[${key}]`;
+    });
+    return renderTaggedText(expanded, item);
 }
-
-// 解析 [[tag|內容]]，支援遞迴
 function renderTaggedText(text, item = {}) {
     if (typeof text !== 'string') return text;
     const tagRegex = /\[\[([\w-]+)\|/g;
-
     function parse(str) {
         let result = '';
         let i = 0;
-
         while (i < str.length) {
             tagRegex.lastIndex = i;
             const match = tagRegex.exec(str);
-
             if (!match) {
                 result += str.slice(i);
                 break;
@@ -53,9 +52,9 @@ function renderTaggedText(text, item = {}) {
 
             const start = match.index;
             const cls = match[1];
-            result += str.slice(i, start); // 前段文字
+            result += str.slice(i, start); // 加入前段純文字
 
-            // 找到對應的 ]]
+            // 從 match 之後開始解析內部內容
             let depth = 1;
             let j = tagRegex.lastIndex;
             let content = '';
@@ -79,15 +78,22 @@ function renderTaggedText(text, item = {}) {
                 }
             }
 
-            // 遞迴解析內部
+            // 遞迴處理內層的內容
             const innerParsed = parse(content.trim());
+
+            // 根據 tag 類型做渲染
             let replaced = '';
 
             if (cls === "notetop") {
+                // innerParsed 是: [[note2]]
+                // parse(innerParsed) ⇒ 應該解析成：<span class="note2"></span>
+                const final = parse(innerParsed);
+
+                // 嘗試從 innerParsed 解析出 key（例如：note2）
                 const keyMatch = innerParsed.match(/^\[\[([\w-]+)\]\]$/);
                 const key = keyMatch?.[1];
                 const noteVal = key ? item.note?.[key] : null;
-                replaced = renderTextWithNote(noteVal ?? innerParsed);
+                replaced = renderTextWithNote(noteVal ?? final);
             } else if (cls === "pitch") {
                 try {
                     const arr = JSON.parse(innerParsed);
@@ -97,8 +103,8 @@ function renderTaggedText(text, item = {}) {
                 }
             } else if (cls.trim() === "furi") {
                 try {
-                    const fixed = `[${innerParsed}]`; 
-                    const data = JSON.parse(fixed); 
+                    const fixed = `[${innerParsed}]`; // ✨ 自動補成合法 JSON 陣列
+                    const data = JSON.parse(fixed); // [{kanji:..., kana:...}, {...}]
                     const svg = renderFuriganaSvg(data);
                     const wrapper = document.createElement("div");
                     wrapper.classList.add("svg-container");
@@ -119,40 +125,7 @@ function renderTaggedText(text, item = {}) {
         }
         return result;
     }
-
     return parse(text);
-}
-
-// ========= 渲染表格單元格 =========
-function renderCell(cell, item = {}) {
-    if (cell == null) return "";
-
-    // 嘗試解析 JSON
-    let parsed;
-    if (typeof cell === "string") {
-        const trimmed = cell.trim();
-        if ((trimmed.startsWith("[") && trimmed.endsWith("]")) ||
-            (trimmed.startsWith("{") && trimmed.endsWith("}"))) {
-            try {
-                parsed = JSON.parse(trimmed);
-            } catch(e) {
-                return renderTagged(cell, item);
-            }
-        } else {
-            return renderTagged(cell, item);
-        }
-    } else {
-        parsed = cell;
-    }
-
-    // [{k,f}, ...] 或 {k,f} → renderFurigana
-    if (Array.isArray(parsed) && parsed.length && "k" in parsed[0]) {
-        return renderFurigana(parsed);
-    } else if (typeof parsed === 'object' && "k" in parsed) {
-        return renderFurigana([parsed]);
-    }
-
-    return String(parsed);
 }
 function renderTwoPitch(kanaArray) {
     if (!Array.isArray(kanaArray) || kanaArray.length !== 2) return '';
@@ -431,4 +404,38 @@ function renderTable(data) {
     ).join("");
 
     return `<table class="${cls}">${caption}${header}<tbody>${body}</tbody></table>`;
+}
+
+function renderCell(cell) {
+    // 空值處理
+    if (cell == null) return "";
+
+    // 如果是字串，先嘗試判斷是否為 JSON
+    if (typeof cell === "string") {
+        const trimmed = cell.trim();
+        if ((trimmed.startsWith("{") && trimmed.endsWith("}")) ||
+            (trimmed.startsWith("[") && trimmed.endsWith("]"))) {
+            try {
+                const parsed = JSON.parse(trimmed);
+                return renderCell(parsed); // 再遞迴一次，交給物件/陣列處理
+            } catch (e) {
+                // 不是合法 JSON → 當成標記字串處理
+                return renderTagged(cell);
+            }
+        }
+        // 純文字或標記字串
+        return renderTagged(cell);
+    }
+    
+    // 如果是 {k,f} 的物件
+    if (typeof cell === "object" && "k" in cell) {
+        return renderFurigana([cell]);
+    }
+
+    // 如果是 [{k,f}, ...] 陣列
+    if (Array.isArray(cell) && cell.length && typeof cell[0] === "object" && "k" in cell[0]) {
+        return renderFurigana(cell);
+    }
+    // 其他 → 強制轉字串
+    return String(cell);
 }

@@ -21,12 +21,12 @@ function preloadTitles() {
 
 // ========= 主要載入批次內容 =========
 async function loadBatch(batchIndex) {
-  if (loadedContentsSet.has(batchIndex)) return;  // 避免重複載入
+  if (loadedContentsSet.has(batchIndex)) return;
 
   await loadDataFile(`grammardata/grammar-data-${batchIndex}.js`, batchIndex, false);
   loadedContentsSet.add(batchIndex);
-
   manageBatchDom(batchIndex);
+
 }
 
 // ========= 管理DOM，控制只保留當前及前後批次 =========
@@ -206,12 +206,13 @@ function renderGrammarItem(item, batchIndex, idx) {
 }
 
 // ========= 滾動監聽，滾動到底部時載入下一批 =========
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-    if (currentBatch >= maxBatch) return;
-    currentBatch++;
-    loadBatch(currentBatch);
-  }
+grammarContent.addEventListener('scroll', () => {
+    if (grammarContent.scrollTop + grammarContent.clientHeight >= grammarContent.scrollHeight - 600) {
+        if (currentBatch >= maxBatch) return;
+        loadBatch(currentBatch + 1).then(() => {
+            currentBatch++;
+        });
+    }
 });
 
 // ========= 頁面初始化 =========
