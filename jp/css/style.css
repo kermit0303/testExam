@@ -40,7 +40,7 @@ ruby {
   font-size: 36px;
 }
 
-ruby rt {
+ruby>rt {
   margin-top: 2px;
   font-size: 22px;
   color: #888;
