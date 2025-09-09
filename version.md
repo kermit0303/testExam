@@ -4,6 +4,10 @@
 
  6/24 影片先看一下
 
+V1.0.35
+- [Improvement] 修改排版
+- [Improvement] 調整架構
+
 V1.0.34
 - [BugFix]讓第一頁在grammerdata
 - [Improvement]新增單字的table caption可以有ruby支援

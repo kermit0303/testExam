@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>文法筆記系統</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../css/style.css">
   <style>
     .inbody {
       margin: 0;
@@ -29,7 +29,7 @@
     }
 
     .sidebar h2 {
-      font-size: 42px;
+      font-size: 38px;
       font-weight: 700;
       color: #6b5b4b;
       /* 棕色調 */
@@ -51,7 +51,7 @@
       padding: 10px 15px;
       display: block;
       border-radius: 6px;
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 600;
       transition: 0.3s;
     }
@@ -125,7 +125,7 @@
     .search-box input {
       width: 100%;
       padding: 12px 16px;
-      font-size: 32px;
+      font-size: 28px;
       border: 2px solid #c7b8a6;
       /* 淡米色 */
       border-radius: 8px;
@@ -146,7 +146,8 @@
     section h2 {
       color: #4a5d23;
       /* 墨綠 */
-      margin: 12px 0;
+      margin: 6px 0;
+      font-size: 36px;
       line-height: 1.4;
     }
 
@@ -166,7 +167,7 @@
     section {
       scroll-margin-top: 120px;
       margin: 10px;
-      font-size: 46px;
+      font-size: 40px;
       line-height: 1.8;
       color: #5a5a5a;
     }
@@ -224,7 +225,7 @@
       border: none;
       border-radius: 6px;
       padding: 8px 14px;
-      font-size: 36px;
+      font-size: 32px;
       font-weight: bold;
       cursor: pointer;
     }
@@ -239,7 +240,7 @@
     }
 
     .example-title {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 600;
       margin-bottom: 8px;
       color: #40514e;
@@ -249,7 +250,7 @@
       color: #6b5b4b;
       /* 柔棕色，更溫暖 */
       font-weight: 500;
-      font-size: 34px;
+      font-size: 28px;
       line-height: 1.5;
       margin: 6px 0;
     }
@@ -257,7 +258,7 @@
     .exam-zh {
       color: #6b5b4b;
       /* 柔棕色，比原本深灰溫暖 */
-      font-size: 34px;
+      font-size: 28px;
       /* 適中大小 */
       line-height: 1.6;
       /* 舒服行距 */
@@ -273,6 +274,18 @@
       /* 輕微陰影 */
     }
 
+    .exam-jp {
+      color: #6b7b4d;
+      /* 柔和抹茶綠，比墨綠淺 */
+      line-height: 1.8;
+      background: #fdfcf9;
+      /* 幾乎白的米色 */
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ece7de;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
     .option-box {
       display: inline-block;
       /* 整個框框跟文字在同一行 */
@@ -281,8 +294,8 @@
       background: #f9f5f0;
       /* 溫暖米色背景 */
       border-radius: 12px;
-      padding: 0.3em 0.6em;
-      margin: 0 4px;
+      padding: 3px;
+      margin: 0 2px;
       vertical-align: middle;
       color: #7a5a3e;
       /* 暖棕色字體 */
@@ -297,6 +310,7 @@
 
     .option-box div {
       line-height: 1.3;
+      font-size: 36px;
       /* 每個選項換行間距 */
     }
 
@@ -312,8 +326,8 @@
       /* 淡米色邊框 */
       background: #fdfbf6;
       /* 柔和背景 */
-      padding: 20px 24px;
-      margin: 20px;
+      padding: 10px 12px;
+      margin: 10px;
       border-radius: 12px;
       box-shadow: 1px 2px 8px rgba(200, 180, 160, 0.15);
       /* 柔和陰影 */
@@ -341,7 +355,7 @@
       display: inline-block;
       position: relative;
       z-index: 0;
-      margin-top: 115px;
+      margin-top: 125px;
       /* ⭐ 預留空間，避免擋住上一排 */
     }
 
@@ -443,6 +457,7 @@
       pointer-events: none;
       /* 不影響文字互動 */
     }
+
     .icon {
       flex-shrink: 0;
       width: 32px;
@@ -496,9 +511,9 @@
 
 <body>
   <div class="toolbar">
-    <a href="vocab.html">単語</a>
+    <a href="../vocab/vocab.html">単語</a>
     <a href="grammar.html" class="active">文型</a>
-    <a href="record.html">記錄</a>
+    <a href="../record/record.html">記錄</a>
     <p id="vid" style="color: #ccc;">V1.0.31</p>
   </div>
   <div class="inbody">
@@ -517,7 +532,8 @@
       <div id="grammar-content"></div>
     </div>
   </div>
-  <script src="func.js"></script>
+  <script src="../../js/getVersion.js"></script>
+  <script src="../../js/func.js"></script>
   <script src="grammar.js"></script>
 </body>
 
