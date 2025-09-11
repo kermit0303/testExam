@@ -1,18 +1,34 @@
+html {
+  scroll-padding-top: 80px;
+  /* 和 toolbar 高度一致 */
+}
+
+section {
+  scroll-margin-top: 60px;
+  /* top-bar 的高度 */
+}
+
 body {
   font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Noto Serif TC', sans-serif;
   margin: 0;
   background: #faf8f4;
   color: #333;
-  overflow: hidden; /* 這樣 body 就不會有滾軸了 */
+  overflow: hidden;
+  /* 這樣 body 就不會有滾軸了 */
 }
+
 .toolbar {
-  background-color: #333;
-  padding: 12px 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  /* 你原本的高度 */
+  background: #333;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* 或 space-between 看需求 */
-  position: relative;          /* 讓子元素絕對定位參考 */
-  height: 80px;                /* toolbar 高度，可調整 */
+  padding: 12px 24px;
+  z-index: 30;
 }
 
 .toolbar a {
@@ -29,10 +45,14 @@ body {
 }
 
 #vid {
-  position: absolute;  /* 必須加 */
-  bottom: 5px;         /* 貼近底部 */
-  left: 50%;           /* 水平置中 */
-  transform: translateX(-50%); /* 調整水平置中 */
+  position: absolute;
+  /* 必須加 */
+  bottom: 5px;
+  /* 貼近底部 */
+  left: 50%;
+  /* 水平置中 */
+  transform: translateX(-50%);
+  /* 調整水平置中 */
   color: #ccc;
   font-size: 18px;
 }
@@ -81,15 +101,15 @@ ruby>rb {
 /* 假名 */
 ruby>rt {
   color: #e67e22;
-  /* 橘色 */  
-  font-size: 14px ;
+  /* 橘色 */
+  font-size: 14px;
   font-weight: normal;
 }
 
 /* 中文翻譯區塊 */
 .zh {
   margin-top: 5px;
-  font-size: 18px;
+  font-size: 32px;
   color: #34495e;
 }
 
@@ -118,7 +138,7 @@ ruby>rt {
 /* 統一 th、td 的排版與線條 */
 .table-jp th,
 .table-jp td {
-  padding:12px 12px;
+  padding: 8px 12px;
   font-size: 40px;
   text-align: left;
   border-right: 1px solid #e5dccf;
@@ -175,18 +195,188 @@ ruby>rt {
 h2::before {
   content: "§";
   margin-right: 4px;
-  color: #3b4a18;  /* 稍微深一點的墨綠 */
+  color: #3b4a18;
+  /* 稍微深一點的墨綠 */
   font-weight: bold;
-  font-size: 1.2em; /* 稍微大一點 */
+  font-size: 1.2em;
+  /* 稍微大一點 */
 }
+
 .table-jp td {
-  font-size: 36px;       /* 固定漢字/主要文字大小 */
+  font-size: 36px;
+  /* 固定漢字/主要文字大小 */
   line-height: 1.5;
 }
 
 /* table 內 ruby 的假名固定大小 */
-.table-jp td ruby > rt {
-  font-size: 24px;       /* 固定假名大小 */
+.table-jp td ruby>rt {
+  font-size: 30px;
+  /* 固定假名大小 */
   line-height: 1;
   margin-bottom: 2px;
+}
+
+
+.option-box {
+  display: inline-block;
+  /* 整個框框跟文字在同一行 */
+  border-left: 3px solid #d8a47f;
+  /* 柔和的淺橘色大括弧效果 */
+  background: #f9f5f0;
+  /* 溫暖米色背景 */
+  border-radius: 12px;
+  margin: 14px;
+  vertical-align: middle;
+  color: #7a5a3e;
+  /* 暖棕色字體 */
+  font-weight: 600;
+  box-shadow: 1px 1px 4px rgba(216, 164, 127, 0.3);
+}
+
+.option-box:hover {
+  background: #f3e8dd;
+  /* 輕微變亮效果，hover時更溫柔 */
+}
+
+.option-box div {
+  line-height: 1.3;
+  font-size: 36px;
+  /* 每個選項換行間距 */
+}
+
+.note-box-top ruby>rt {
+  font-size: 30px;
+  /* 固定字體大小 */
+  font-weight: normal;
+  /* 視需要調整粗細 */
+  line-height: 1.2;
+  /* 避免太擠 */
+}
+
+
+.yellow {
+  color: #d9b611;
+  /* 柔和金黃 */
+  font-weight: bold;
+}
+
+.strike {
+  color: #5a5a5a;
+  text-decoration: line-through;
+  text-decoration-color: #c08c2c;
+}
+
+.blue {
+  color: #5a9bd4;
+  /* 日系水藍 */
+  font-weight: bold;
+}
+
+.space {
+  color: #698b69;
+  /* 柔和綠 */
+  font-weight: bold;
+  letter-spacing: 0.3em;
+}
+.sidebar {
+  position: fixed;       /* 固定在視窗 */
+  top: 180px;             /* 避開 toolbar */
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  background: #f9f6f0;
+  padding: 30px 20px;
+  overflow-y: auto;
+  border-right: 1px solid #e4ddd4;
+  transform: translateX(-100%);  /* 預設隱藏，移出畫面 */
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.sidebar.show {
+  transform: translateX(0);      /* 顯示時滑入 */
+}
+
+.sidebar h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #6b5b4b;
+  /* 棕色調 */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 18px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #7a6f64;
+  /* 柔和灰棕 */
+  padding: 10px 15px;
+  display: block;
+  border-radius: 6px;
+  font-size: 30px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background: #e7dfd6;
+  /* 和紙米色背景 */
+  color: #40514e;
+  /* 墨綠 */
+}
+
+.main {
+  margin-top: 80px;
+  /* 避開 toolbar */
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+  color: #5a5a5a;
+  overflow: hidden;
+  /* 可以保留，但不要阻止 top-bar sticky */
+}
+
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  /* 一定要有背景 */
+  z-index: 20;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+
+/* 調整按鈕 */
+
+/* 分類按鈕樣式 */
+#toggle-sidebar {
+  flex-shrink: 0;
+  /* 按鈕寬度固定，不會縮 */
+  color: #b58968;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 70px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#toggle-sidebar:hover {
+  color: #8b6d4d;
 }

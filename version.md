@@ -4,6 +4,9 @@
 
  6/24 影片先看一下
  
+V1.0.45
+- [Improvement] 新增單字 到jp
+
 V1.0.44
 - [BugFix] 修改側面list功能 點選後關閉 單字篇
 - [Improvement] 新增單字

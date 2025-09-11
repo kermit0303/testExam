@@ -2,7 +2,28 @@
 const categoryList = document.getElementById('category-list');
 const grammarContent = document.getElementById('grammar-content');
 
-// ========= 渲染單一語法區塊 =========
+// ========= 渲染左側標題 =========
+function renderSidebarOnly(item, batchIndex, idx) {
+  const id = `section-${batchIndex}-${idx}`;
+  if (!document.getElementById(`link-${id}`)) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${id}`;
+    a.id = `link-${id}`;
+    a.dataset.batchLink = batchIndex;
+
+    if (item.tile) {
+      if (Array.isArray(item.tile)) {
+        a.innerHTML = renderTagged(renderFurigana(item.tile), item);
+      } else {
+        a.innerHTML = renderTagged(item.tile, item);
+      }
+    }
+    li.appendChild(a);
+    categoryList.appendChild(li);
+  }
+}
+
 
 // ========= 全局設定 =========
 const maxBatch = 2;  // 假設最大有10批次，可依需求調整
@@ -106,6 +127,11 @@ function renderSidebarOnly(item, batchIndex, idx) {
         a.innerHTML = renderTagged(item.tile, item);
       }
     }
+    a.addEventListener('click', (e) => {
+
+      // 關閉側邊欄
+      sidebar.classList.remove('show');
+    });
     li.appendChild(a);
     categoryList.appendChild(li);
   }
@@ -207,12 +233,12 @@ function renderGrammarItem(item, batchIndex, idx) {
 
 // ========= 滾動監聽，滾動到底部時載入下一批 =========
 grammarContent.addEventListener('scroll', () => {
-    if (grammarContent.scrollTop + grammarContent.clientHeight >= grammarContent.scrollHeight - 600) {
-        if (currentBatch >= maxBatch) return;
-        loadBatch(currentBatch + 1).then(() => {
-            currentBatch++;
-        });
-    }
+  if (grammarContent.scrollTop + grammarContent.clientHeight >= grammarContent.scrollHeight - 600) {
+    if (currentBatch >= maxBatch) return;
+    loadBatch(currentBatch + 1).then(() => {
+      currentBatch++;
+    });
+  }
 });
 
 // ========= 頁面初始化 =========
