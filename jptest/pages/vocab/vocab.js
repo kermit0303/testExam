@@ -119,15 +119,14 @@ function createCaption(captionText, batchIndex) {
   a.innerHTML = captionText;
   a.addEventListener('click', (e) => {
 
-      // 關閉側邊欄
-      sidebar.classList.remove('show');
-    });
+    // 關閉側邊欄
+    sidebar.classList.remove('show');
+  });
   li.appendChild(a);
   categoryList.appendChild(li);
 
   return cap;
 }
-
 
 function renderSidebarOnly(item, batchIndex, idx) {
   const id = `section-${batchIndex}-${idx}`;

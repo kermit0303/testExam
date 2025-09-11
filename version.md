@@ -4,6 +4,9 @@
 
  6/24 影片先看一下
  
+V1.0.46
+- [Improvement] 新增單字 到jp 30頁
+
 V1.0.45
 - [Improvement] 新增單字 到jp
 
