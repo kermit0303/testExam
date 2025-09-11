@@ -53,14 +53,10 @@ function renderVocabItemAsCells(item) {
   return [`<td>${content}</td>`];
 }
 let batchCounter = 0;
-
-
 function appendVocabRows(data, columns = 3, caption = "") {
   const batchIndex = batchCounter++;
-
   const container = document.getElementById("word-list");
 
-  // 🔹 新增 section 包裹 table
   const section = document.createElement('section');
   section.id = `section-${batchIndex}`;
   section.dataset.batch = batchIndex;
@@ -69,18 +65,8 @@ function appendVocabRows(data, columns = 3, caption = "") {
   table.className = "table-jp";
 
   if (caption) {
-    const cap = document.createElement("caption");
-    cap.innerHTML = renderMaybeFurigana(caption);
+    const cap = createCaption(caption, batchIndex);
     table.appendChild(cap);
-
-    // 側邊欄
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = `#section-${batchIndex}`; // 🔹 直接用 section id
-    a.dataset.batchLink = batchIndex;
-    a.innerHTML = caption;
-    li.appendChild(a);
-    categoryList.appendChild(li);
   }
 
   const tbody = document.createElement("tbody");
@@ -115,10 +101,33 @@ function appendVocabRows(data, columns = 3, caption = "") {
     tbody.insertAdjacentHTML("beforeend", `<tr>${row.join("")}</tr>`);
   }
 
-  // 🔹 把 table 放進 section，再放到 container
   section.appendChild(table);
   container.appendChild(section);
 }
+
+
+function createCaption(captionText, batchIndex) {
+  // 1️⃣ 建立 caption 元素
+  const cap = document.createElement("caption");
+  cap.innerHTML = renderMaybeFurigana(captionText);
+
+  // 2️⃣ 側邊欄
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.href = `#section-${batchIndex}`;
+  a.dataset.batchLink = batchIndex;
+  a.innerHTML = captionText;
+  a.addEventListener('click', (e) => {
+
+      // 關閉側邊欄
+      sidebar.classList.remove('show');
+    });
+  li.appendChild(a);
+  categoryList.appendChild(li);
+
+  return cap;
+}
+
 
 function renderSidebarOnly(item, batchIndex, idx) {
   const id = `section-${batchIndex}-${idx}`;
@@ -193,13 +202,34 @@ function loadNextVocabPage() {
     if (pageData) {
       if (pageData.tables) {
         pageData.tables.forEach(table => {
-          const rows = table.rows || [];
-          const columns = table.columns || 3;
-          appendVocabRows(rows, columns, table.caption);  // 可以順便傳 caption
+          if (table.header) {
+            const batchIndex = batchCounter++;
+            if (table.caption) {
+              createCaption(table.caption, batchIndex);
+            }
+
+            // 1️⃣ 用 renderTable 生成完整 HTML
+            const tableHTML = renderTagged(renderTable(table), table); // 如果需要，可以傳 item 或 table
+
+            // 2️⃣ 用 wrapper 包起來
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = tableHTML;
+
+            const section = document.createElement('section');
+            section.id = `section-${batchIndex}`;
+            section.dataset.batch = batchIndex;
+            // 3️⃣ 放到 section，再放到 container
+            section.appendChild(wrapper);
+            container.appendChild(section);
+
+          }
+          else {
+
+            const rows = table.rows || [];
+            const columns = table.columns || 3;
+            appendVocabRows(rows, columns, table.caption);  // 可以順便傳 caption
+          }
         });
-      } else if (Array.isArray(pageData)) {
-        // 舊版資料支援
-        appendVocabRows(pageData, 3);
       }
       currentPage++;
       isLoading = false;

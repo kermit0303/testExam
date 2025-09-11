@@ -4,9 +4,12 @@
 
  6/24 影片先看一下
  
- 
+V1.0.44
+- [BugFix] 修改側面list功能 點選後關閉 單字篇
+- [Improvement] 新增單字
+
 V1.0.43
-- [BugFix] 修改側面list功能 點選後關閉
+- [BugFix] 修改側面list功能 點選後關閉 文法篇
 
 V1.0.42
 - [BugFix] 修改側面list功能
