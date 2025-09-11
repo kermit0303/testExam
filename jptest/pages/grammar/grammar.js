@@ -127,6 +127,11 @@ function renderSidebarOnly(item, batchIndex, idx) {
         a.innerHTML = renderTagged(item.tile, item);
       }
     }
+    a.addEventListener('click', (e) => {
+
+      // 關閉側邊欄
+      sidebar.classList.remove('show');
+    });
     li.appendChild(a);
     categoryList.appendChild(li);
   }
