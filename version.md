@@ -3,6 +3,11 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+V1.0.41
+- [BugFix] 修改側面list功能
+- [Improvement] 新增爸體重
+- [Improvement] 單字也有toolbar
+
 V1.0.40
 - [BugFix] 優化效能
 V1.0.39
