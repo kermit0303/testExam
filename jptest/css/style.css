@@ -278,17 +278,23 @@ h2::before {
   font-weight: bold;
   letter-spacing: 0.3em;
 }
-
 .sidebar {
-  margin-top: 80px;
+  position: fixed;       /* 固定在視窗 */
+  top: 180px;             /* 避開 toolbar */
+  left: 0;
+  bottom: 0;
   width: 240px;
   background: #f9f6f0;
-  /* 柔和米色 */
   padding: 30px 20px;
   overflow-y: auto;
   border-right: 1px solid #e4ddd4;
-  /* 淡雅邊框 */
-  display: none;
+  transform: translateX(-100%);  /* 預設隱藏，移出畫面 */
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.sidebar.show {
+  transform: translateX(0);      /* 顯示時滑入 */
 }
 
 .sidebar h2 {
@@ -373,9 +379,4 @@ h2::before {
 
 #toggle-sidebar:hover {
   color: #8b6d4d;
-}
-
-/* 顯示的時候 */
-.sidebar.show {
-  display: block;
 }
