@@ -280,7 +280,7 @@ h2::before {
 }
 .sidebar {
   position: fixed;       /* 固定在視窗 */
-  top: 180px;             /* 避開 toolbar */
+  top: 220px;             /* 避開 toolbar */
   left: 0;
   bottom: 0;
   width: 240px;
@@ -379,4 +379,13 @@ h2::before {
 
 #toggle-sidebar:hover {
   color: #8b6d4d;
+}
+.cell-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;  /* 內容靠底 */
+}
+
+.jp ruby {
+  vertical-align: bottom;    /* ruby 內文字置底 */
 }

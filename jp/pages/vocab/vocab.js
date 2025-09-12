@@ -53,7 +53,7 @@ function renderVocabItemAsCells(item) {
   return [`<td>${content}</td>`];
 }
 let batchCounter = 0;
-function appendVocabRows(data, columns = 3, caption = "") {
+function appendVocabRows(data, columns = 3, caption = "",item) {
   const batchIndex = batchCounter++;
   const container = document.getElementById("word-list");
 
@@ -65,7 +65,7 @@ function appendVocabRows(data, columns = 3, caption = "") {
   table.className = "table-jp";
 
   if (caption) {
-    const cap = createCaption(caption, batchIndex);
+    const cap = createCaption(caption, batchIndex,item);
     table.appendChild(cap);
   }
 
@@ -106,7 +106,7 @@ function appendVocabRows(data, columns = 3, caption = "") {
 }
 
 
-function createCaption(captionText, batchIndex) {
+function createCaption(captionText, batchIndex,item) {
   // 1️⃣ 建立 caption 元素
   const cap = document.createElement("caption");
   cap.innerHTML = renderMaybeFurigana(captionText);
@@ -116,7 +116,7 @@ function createCaption(captionText, batchIndex) {
   const a = document.createElement('a');
   a.href = `#section-${batchIndex}`;
   a.dataset.batchLink = batchIndex;
-  a.innerHTML = captionText;
+  a.innerHTML = renderTagged(captionText, item);
   a.addEventListener('click', (e) => {
 
     // 關閉側邊欄
@@ -128,26 +128,6 @@ function createCaption(captionText, batchIndex) {
   return cap;
 }
 
-function renderSidebarOnly(item, batchIndex, idx) {
-  const id = `section-${batchIndex}-${idx}`;
-  if (!document.getElementById(`link-${id}`)) {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = `#${id}`;
-    a.id = `link-${id}`;
-    a.dataset.batchLink = batchIndex;
-
-    if (item.tile) {
-      if (Array.isArray(item.tile)) {
-        a.innerHTML = renderTagged(renderFurigana(item.tile), item);
-      } else {
-        a.innerHTML = renderTagged(item.tile, item);
-      }
-    }
-    li.appendChild(a);
-    categoryList.appendChild(li);
-  }
-}
 function scrollToBatch(batchIndex) {
   const table = document.querySelector(`[data-batch='${batchIndex}']`);
   if (!table) return;
@@ -204,9 +184,8 @@ function loadNextVocabPage() {
           if (table.header) {
             const batchIndex = batchCounter++;
             if (table.caption) {
-              createCaption(table.caption, batchIndex);
+              createCaption(table.caption, batchIndex,table);
             }
-
             // 1️⃣ 用 renderTable 生成完整 HTML
             const tableHTML = renderTagged(renderTable(table), table); // 如果需要，可以傳 item 或 table
 
@@ -223,10 +202,9 @@ function loadNextVocabPage() {
 
           }
           else {
-
             const rows = table.rows || [];
             const columns = table.columns || 3;
-            appendVocabRows(rows, columns, table.caption);  // 可以順便傳 caption
+            appendVocabRows(rows, columns, table.caption,table);  // 可以順便傳 caption
           }
         });
       }
