@@ -7,7 +7,8 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
-
+V1.0.51
+- [Improvement] 新增 正式區
 V1.0.50
 - [BugFix] 修改pitch 格式
 - [Improvement] 新增 blue-underline

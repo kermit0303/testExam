@@ -389,3 +389,40 @@ h2::before {
 .jp ruby {
   vertical-align: bottom;    /* ruby 內文字置底 */
 }
+.blue-underline-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center; /* 文字與備註置中 */
+    font-size: 1em;
+}
+.undernote {
+    font-size: 0.6em;
+    color: #7a8a99; /* 柔和的灰藍色 */
+    margin-top: 2px;
+    user-select: none;
+}
+
+.underblue {
+    color: #5a9bd4;
+    text-decoration: underline;
+    text-underline-position: under; /* 底線在字下方 */
+    cursor: pointer;
+}
+.icon-important {
+    color: #d14b4b;
+    font-size: 0.8em;
+    margin-right: 0.3em;
+    user-select: none;
+}
+
+    .icon-important::before {
+        content: "❖";
+    }
+
+
+.dash {
+    color: #40514e;
+    font-size: 60px;
+    border-radius: 4px;
+    font-weight: bold;
+}

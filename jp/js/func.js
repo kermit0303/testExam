@@ -36,97 +36,213 @@ function renderTagged(text, item) {
     });
     return renderTaggedText(expanded, item);
 }
+
 function renderTaggedText(text, item = {}) {
     if (typeof text !== 'string') return text;
-    const tagRegex = /\[\[([\w-]+)\|/g;
-    function parse(str) {
-        let result = '';
-        let i = 0;
-        while (i < str.length) {
-            tagRegex.lastIndex = i;
-            const match = tagRegex.exec(str);
-            if (!match) {
-                result += str.slice(i);
-                break;
-            }
-
-            const start = match.index;
-            const cls = match[1];
-            result += str.slice(i, start); // 加入前段純文字
-
-            // 從 match 之後開始解析內部內容
-            let depth = 1;
-            let j = tagRegex.lastIndex;
-            let content = '';
-
-            while (j < str.length) {
-                if (str.slice(j, j + 2) === '[[') {
-                    depth++;
-                    content += '[[';
-                    j += 2;
-                } else if (str.slice(j, j + 2) === ']]') {
-                    depth--;
-                    if (depth === 0) {
-                        j += 2;
-                        break;
-                    } else {
-                        content += ']]';
-                        j += 2;
-                    }
-                } else {
-                    content += str[j++];
-                }
-            }
-
-            // 遞迴處理內層的內容
-            const innerParsed = parse(content.trim());
-
-            // 根據 tag 類型做渲染
-            let replaced = '';
-
-            if (cls === "notetop") {
-                // innerParsed 是: [[note2]]
-                // parse(innerParsed) ⇒ 應該解析成：<span class="note2"></span>
-                const final = parse(innerParsed);
-
-                // 嘗試從 innerParsed 解析出 key（例如：note2）
-                const keyMatch = innerParsed.match(/^\[\[([\w-]+)\]\]$/);
-                const key = keyMatch?.[1];
-                const noteVal = key ? item.note?.[key] : null;
-                replaced = renderTextWithNote(noteVal ?? final);
-            } else if (cls === "pitch") {
-                try {
-                    const arr = JSON.parse(innerParsed);
-                    replaced = renderTwoPitch(arr);
-                } catch (e) {
-                    replaced = `<span class="${cls}">解析錯誤</span>`;
-                }
-            } else if (cls.trim() === "furi") {
-                try {
-                    const fixed = `[${innerParsed}]`; // ✨ 自動補成合法 JSON 陣列
-                    const data = JSON.parse(fixed); // [{kanji:..., kana:...}, {...}]
-                    const svg = renderFuriganaSvg(data);
-                    const wrapper = document.createElement("div");
-                    wrapper.classList.add("svg-container");
-                    wrapper.appendChild(svg);
-                    replaced = wrapper.outerHTML;
-                } catch (e) {
-                    console.error("Furigana JSON 解析錯誤", e);
-                    replaced = `<span class="error">Furigana 錯誤</span>`;
-                }
-            } else if (cls === "icon") {
-                replaced = `<span class="icon ${innerParsed}"></span>`;
-            } else {
-                replaced = `<span class="${cls}">${innerParsed}</span>`;
-            }
-
-            result += replaced;
-            i = j;
-        }
-        return result;
-    }
-    return parse(text);
+    return parseTaggedText(text, item);
 }
+function parseTaggedText(str, item = {}) {
+    const tagRegex = /\[\[([\w-]+)\|/g;
+    let result = '';
+    let i = 0;
+
+    while (i < str.length) {
+        tagRegex.lastIndex = i;
+        const match = tagRegex.exec(str);
+        if (!match) {
+            result += str.slice(i);
+            break;
+        }
+
+        const start = match.index;
+        const cls = match[1];
+
+        // 加入標籤前的文字
+        result += str.slice(i, start);
+
+
+        // 找標籤內容
+        let depth = 1;
+        let j = tagRegex.lastIndex;
+        let content = '';
+        let insideString = false;
+
+        while (j < str.length) {
+            const ch = str[j];
+            const nextTwo = str.slice(j, j + 2);
+
+            if (ch === '"') {
+                insideString = !insideString;
+                content += ch;
+                j++;
+                continue;
+            }
+
+            if (insideString) {
+                content += ch;
+                j++;
+                continue;
+            }
+
+            if (nextTwo === '[[') {
+                depth++;
+                content += '[[';
+                j += 2;
+            } else if (nextTwo === ']]') {
+                depth--;
+                if (depth === 0) {
+                    j += 2;
+                    break;
+                } else {
+                    content += ']]';
+                    j += 2;
+                }
+            } else {
+                content += ch;
+                j++;
+            }
+        }
+
+        var innerParsed = parseTaggedText(content.trim(), item);
+
+        // 渲染對應標籤
+        let replaced = '';
+
+        if (cls === "notetop") {
+            const final = parseTaggedText(innerParsed, item);
+            const keyMatch = innerParsed.match(/^\[\[([\w-]+)\]\]$/);
+            const key = keyMatch?.[1];
+            const noteVal = key ? item.note?.[key] : null;
+            replaced = renderTextWithNote(noteVal ?? final);
+        } else if (cls === "pitch") {
+            try {
+                if (innerParsed.startsWith('"') && innerParsed.endsWith('"')) {
+                    innerParsed = innerParsed.slice(1, -1);
+                }
+                const arr = JSON.parse(innerParsed);
+                replaced = renderTwoPitch(arr);
+            } catch (e) {
+                replaced = `<span class="${cls}">解析錯誤</span>`;
+            }
+        } else if (cls === "pitch-q") {
+            try {
+                if (innerParsed.startsWith('"') && innerParsed.endsWith('"')) {
+                    innerParsed = innerParsed.slice(1, -1);
+                }
+                const arr = JSON.parse(innerParsed);
+                replaced = renderPitchQuestion(arr);
+            } catch (e) {
+                replaced = `<span class="${cls}">解析錯誤</span>`;
+            }
+        }
+        else if (cls === 'blue-underline') {
+            // 假設 innerParsed 是 "い|備註文字"
+            const [text, note] = innerParsed.split('|');
+            replaced = `
+            <span class="blue-underline-wrapper">
+              <span class="underblue">${text}</span>
+              <span class="undernote">${note ?? ''}</span>
+            </span>
+          `;
+        }
+        else if (cls === "furi") {
+            try {
+                const fixed = `[${innerParsed}]`;
+                const data = JSON.parse(fixed);
+                const svg = renderFuriganaSvg(data);
+                const wrapper = document.createElement("div");
+                wrapper.classList.add("svg-container");
+                wrapper.appendChild(svg);
+                replaced = wrapper.outerHTML;
+            } catch (e) {
+                console.error("Furigana JSON 解析錯誤", e);
+                replaced = `<span class="error">Furigana 錯誤</span>`;
+            }
+        } else if (cls === "icon") {
+            replaced = `<span class="icon ${innerParsed}"></span>`;
+        } else {
+            replaced = `<span class="${cls}">${innerParsed}</span>`;
+        }
+
+        result += replaced;
+        i = j;
+    }
+
+    return result;
+}
+
+function renderPitchQuestion(kanaArray) {
+    if (!Array.isArray(kanaArray) || kanaArray.length === 0) return '';
+
+    const container = document.createElement('div');
+    container.className = 'containerup';
+    container.style.position = 'relative';
+    container.style.display = 'inline-flex';
+    container.style.alignItems = 'center';
+    container.style.fontSize = '4rem';
+    container.style.gap = '50px';
+
+    // 建立文字 span
+    kanaArray.forEach(item => {
+        const span = document.createElement('span');
+        span.textContent = item.k;
+        span.style.position = 'relative';
+        span.style.zIndex = '2';
+        container.appendChild(span);
+    });
+
+    // 建立 SVG
+    const svgNS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '200px';
+    svg.style.height = '100px';
+    svg.style.overflow = 'visible';
+    svg.style.zIndex = '1';
+    // 建立 marker（箭頭）
+    const defs = document.createElementNS(svgNS, 'defs');
+    const marker = document.createElementNS(svgNS, 'marker');
+    marker.setAttribute('id', 'arrowhead');
+    marker.setAttribute('markerWidth', '6');      // 縮小寬度
+    marker.setAttribute('markerHeight', '4');     // 縮小高度
+    marker.setAttribute('refX', '4');
+    marker.setAttribute('refY', '2');
+    marker.setAttribute('orient', 'auto');
+    marker.setAttribute('markerUnits', 'strokeWidth');
+    
+
+    const arrowPath = document.createElementNS(svgNS, 'path');
+    arrowPath.setAttribute('d', 'M0,0 L0,4 L6,2 z');  // 小箭頭
+    arrowPath.setAttribute('fill', '#d9534f');
+
+    marker.appendChild(arrowPath);
+    defs.appendChild(marker);
+    svg.appendChild(defs);
+
+    // 繪製線條（微微往上弧度）
+    const path = document.createElementNS(svgNS, 'path');
+    path.setAttribute('d', 'M25,90 Q40,90 55,85 T80,30');
+    // 起點25,90
+    // 控制點60,85（比之前85低，弧度淺）
+    // 終點95,75
+    // 平滑曲線到120,70
+
+    path.setAttribute('stroke', '#d9534f');
+    path.setAttribute('stroke-width', '5');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('marker-end', 'url(#arrowhead)');
+
+    svg.appendChild(path);
+    container.appendChild(svg);
+
+
+    return container.outerHTML;
+}
+
 function renderTwoPitch(kanaArray) {
     if (!Array.isArray(kanaArray) || kanaArray.length !== 2) return '';
 

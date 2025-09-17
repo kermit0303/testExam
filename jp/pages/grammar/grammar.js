@@ -23,8 +23,6 @@ function renderSidebarOnly(item, batchIndex, idx) {
     categoryList.appendChild(li);
   }
 }
-
-
 // ========= 全局設定 =========
 const maxBatch = 2;  // 假設最大有10批次，可依需求調整
 let currentBatch = 1;
@@ -162,7 +160,7 @@ function renderGrammarItem(item, batchIndex, idx) {
   // 處理說明段落（desp）
   if (item.desp) {
     const desc = document.createElement('p');
-    desc.className = 'line-zh';
+      desc.className = 'line-zh';
     if (Array.isArray(item.desp)) {
       desc.innerHTML = renderTagged(renderFurigana(item.desp), item);
     } else {
@@ -174,7 +172,7 @@ function renderGrammarItem(item, batchIndex, idx) {
   // 處理翻譯（trans）
   if (item.trans) {
     const zh = document.createElement('div');
-    zh.className = 'line-zh';
+      zh.className = 'line-zh trans';
     if (Array.isArray(item.trans)) {
       zh.innerHTML = renderTagged(renderFurigana(item.trans), item);
     } else {
