@@ -17,7 +17,6 @@
       /* 溫和深灰 */
     }
 
-
     /* 調整搜尋框 */
     .search-box {
       flex-grow: 1;
@@ -80,7 +79,6 @@
       margin: 12px 0;
     }
 
-
     .brace-container {
       border-left: 4px solid #789262;
       /* 柔和綠 */
@@ -109,15 +107,25 @@
       color: #40514e;
     }
 
-    .line-zh {
-      color: #6b5b4b;
-      /* 柔棕色，更溫暖 */
-      font-weight: 500;
-      font-size: 34px;
-      line-height: 1.5;
-      margin: 6px 0;
-    }
+      .line-zh {
+          color: #6b5b4b;
+          /* 柔棕色，更溫暖 */
+          font-weight: 500;
+          font-size: 34px;
+          line-height: 1.5;
+          margin: 6px 0;
+          border-left: 3px solid #d8c3b5;
+          padding-left: 10px;
+      }
 
+          .line-zh.trans {
+              color: #908b83; /* 柔和的冷灰褐，有深度又溫柔 */
+              font-style: italic;
+              font-size: 28px;
+              line-height: 1.75;
+              letter-spacing: 0.04em;
+              font-family: "Noto Serif JP", "Yu Mincho", serif;
+          }
     .exam-zh {
       color: #6b5b4b;
       /* 柔棕色，比原本深灰溫暖 */
@@ -149,12 +157,6 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    .dash {
-      color: #40514e;
-      font-size: 60px;
-      border-radius: 4px;
-      font-weight: bold;
-    }
 
     .box {
       border: 2px solid #d8cfc4;
@@ -231,7 +233,6 @@
       /* 箭頭稍微往上，和備註框對齊 */
     }
 
-
     .arrow-svg {
       position: absolute;
       top: 0;
@@ -273,7 +274,7 @@
 
     .svg-container path {
       stroke: #789262;
-      stroke-width: 2.5;
+      stroke-width: 2.5px;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -295,7 +296,6 @@
       left: 0;
       overflow: visible;
       pointer-events: none;
-      /* 不影響文字互動 */
     }
 
     .icon {

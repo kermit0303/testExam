@@ -1,8 +1,19 @@
  [[pitch|[{\"k\":\"は\",\"p\":\"H\"},{\"k\":\"し\",\"p\":\"L\"}]]] 
  [[furi|{ \"k\": \"校\", \"f\": \"う\" },{ \"k\": \"ん\"}]]
+ [[pitch-q|\"[{\"k\":\"は\",\"p\":\"H\"}]\"]]
+ [[blue-underline|い|這是備註]]
+ [[icon-important|]]
+ 
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+
+V1.0.50
+- [BugFix] 修改pitch 格式
+- [Improvement] 新增 blue-underline
+- [Improvement] 新增pitch-q 格式 
+- [Improvement] 新增icon-important 格式 
+- [Improvement] 新增筆記9/17
  
 V1.0.49
 - [BugFix] 修改女性襯衫的日文單字
