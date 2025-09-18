@@ -7,6 +7,10 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+V1.0.53
+- [Improvement] 新增 正式區
+- [BugFix] 調整note-top 高度
+
 V1.0.52
 - [BugFix] 修改function renderFurigana 沒有f的時候依然要有ruby 
 - [Improvement] 更新9/16資料

@@ -5,7 +5,7 @@ function renderFurigana(jpArr) {
         if (token.f) {
             return `<ruby>${token.k}<rt>${token.f}</rt></ruby>`;
         } else {
-            return token.k;
+            return `<ruby>${token.k}</ruby>`;
         }
     }).join('');
 }
@@ -175,12 +175,13 @@ function renderPitchQuestion(kanaArray) {
     if (!Array.isArray(kanaArray) || kanaArray.length === 0) return '';
 
     const container = document.createElement('div');
-    container.className = 'containerup';
+    
     container.style.position = 'relative';
     container.style.display = 'inline-flex';
     container.style.alignItems = 'center';
-    container.style.fontSize = '4rem';
+    container.style.fontSize = '40px';
     container.style.gap = '50px';
+    container.style.marginRight = '30px';
 
     // 建立文字 span
     kanaArray.forEach(item => {
@@ -198,23 +199,25 @@ function renderPitchQuestion(kanaArray) {
     svg.style.top = '0';
     svg.style.left = '0';
     svg.style.width = '200px';
-    svg.style.height = '100px';
+    svg.style.height = '70px';
     svg.style.overflow = 'visible';
     svg.style.zIndex = '1';
+    svg.style.gap = '50px';
+
     // 建立 marker（箭頭）
     const defs = document.createElementNS(svgNS, 'defs');
     const marker = document.createElementNS(svgNS, 'marker');
     marker.setAttribute('id', 'arrowhead');
-    marker.setAttribute('markerWidth', '6');      // 縮小寬度
-    marker.setAttribute('markerHeight', '4');     // 縮小高度
-    marker.setAttribute('refX', '4');
-    marker.setAttribute('refY', '2');
+    marker.setAttribute('markerWidth', '4.5');
+marker.setAttribute('markerHeight', '3');
+marker.setAttribute('refX', '2.25');  // 放中間（4.5 的一半）
+marker.setAttribute('refY', '1.5');
     marker.setAttribute('orient', 'auto');
     marker.setAttribute('markerUnits', 'strokeWidth');
-    
+
 
     const arrowPath = document.createElementNS(svgNS, 'path');
-    arrowPath.setAttribute('d', 'M0,0 L0,4 L6,2 z');  // 小箭頭
+arrowPath.setAttribute('d', 'M0,0 L0,3 L4.5,1.5 z');
     arrowPath.setAttribute('fill', '#d9534f');
 
     marker.appendChild(arrowPath);
@@ -223,7 +226,8 @@ function renderPitchQuestion(kanaArray) {
 
     // 繪製線條（微微往上弧度）
     const path = document.createElementNS(svgNS, 'path');
-    path.setAttribute('d', 'M25,90 Q40,90 55,85 T80,30');
+    path.setAttribute('d', 'M5,60 Q20,60 35,55 T55,15');
+    // path.setAttribute('d', 'M25,90 Q40,90 55,85 T80,30');
     // 起點25,90
     // 控制點60,85（比之前85低，弧度淺）
     // 終點95,75
