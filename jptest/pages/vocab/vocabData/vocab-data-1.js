@@ -1,7 +1,6 @@
 window.vocabData1 =
 {
     "tables": [
-         
         {
             "caption": "單字五",
             "rows": [
