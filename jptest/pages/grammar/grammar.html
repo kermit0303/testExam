@@ -170,7 +170,7 @@
           overflow: visible; /* 確保 rt 往外跑不被裁剪 */
       }
       .box:has(rt) {
-          margin-top: 10px; /* 往上頂出框線高度，讓 rt 領域可以「超出」框線 */
+          margin-top: 30px; /* 往上頂出框線高度，讓 rt 領域可以「超出」框線 */
           padding-top: 25px; /* 可根據需要調整 */
           transition: margin-top 5.3s ease;
 
@@ -193,22 +193,20 @@
       }
 
       span.box > ruby {
-          position: relative;
-          display: inline-block;
-      }
+    display: inline-block;
+    position: relative;    /* rt 絕對定位參考 */
+}
 
-          span.box > ruby > rt {
-              position: absolute;
-              top: -10px;
-              left: 70%;
-              transform: translate(-50%, -38px); /* 向上浮動 */
-              font-size: 30px;
-              line-height: 80px;
-              min-height: 30px;
-              white-space: nowrap;
-              padding: 0 6px;
-              z-index: 15;
-          }
+span.box > ruby > rt {
+    position: absolute;
+    bottom: 100%;         /* 放在文字正上方 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30PX;     /* 調整大小 */
+    line-height: 1;
+    white-space: nowrap;
+}
+
 
 
     .note-top {
