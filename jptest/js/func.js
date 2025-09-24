@@ -2,10 +2,12 @@
 // ========= 核心渲染函式 =========
 function renderFurigana(jpArr) {
     return jpArr.map(token => {
+        let k = token.k;
+
         if (token.f) {
-            return `<ruby>${token.k}<rt>${token.f}</rt></ruby>`;
+            return `<ruby>${k}<rt>${token.f}</rt></ruby>`;
         } else {
-            return `<ruby>${token.k}</ruby>`;
+            return `<ruby>${k}</ruby>`;
         }
     }).join('');
 }
@@ -60,7 +62,6 @@ function parseTaggedText(str, item = {}) {
         // 加入標籤前的文字
         result += str.slice(i, start);
 
-
         // 找標籤內容
         let depth = 1;
         let j = tagRegex.lastIndex;
@@ -113,7 +114,7 @@ function parseTaggedText(str, item = {}) {
             const keyMatch = innerParsed.match(/^\[\[([\w-]+)\]\]$/);
             const key = keyMatch?.[1];
             const noteVal = key ? item.note?.[key] : null;
-            replaced = renderTextWithNote(noteVal ?? final);
+            replaced = renderTextWithNote(noteVal ?? final, item);
         } else if (cls === "pitch") {
             try {
                 if (innerParsed.startsWith('"') && innerParsed.endsWith('"')) {
@@ -131,6 +132,26 @@ function parseTaggedText(str, item = {}) {
                 }
                 const arr = JSON.parse(innerParsed);
                 replaced = renderPitchQuestion(arr);
+            } catch (e) {
+                replaced = `<span class="${cls}">解析錯誤</span>`;
+            }
+        } else if (cls === "box") {
+            try {
+
+                try {
+                    if (innerParsed.startsWith('"') && innerParsed.endsWith('"')) {
+                        innerParsed = innerParsed.slice(1, -1);
+                        const arr = JSON.parse(innerParsed); // 嘗試解析 JSON
+                        replaced = `<span class="${cls}">${renderFurigana(arr)}</span>`;      // 是 JSON 就用 renderFurigana
+                    }
+                    else {
+                        replaced = `<span class="${cls}">${innerParsed}</span>`;
+
+                    }
+                } catch (e) {
+                    // 不是 JSON → 當作普通字串處理
+                    replaced = `<span class="${cls}">${innerParsed}</span>`;
+                }
             } catch (e) {
                 replaced = `<span class="${cls}">解析錯誤</span>`;
             }
@@ -302,11 +323,11 @@ function renderTwoPitch(kanaArray) {
     return container.outerHTML;
 }
 
-function renderTextWithNote(noteText) {
+function renderTextWithNote(noteText, item) {
     let content;
-
+    //renderFurigana(d.jp), item);
     if (Array.isArray(noteText)) {
-        content = renderFurigana(noteText);  // 假名顯示
+        content = renderTagged(renderFurigana(noteText), item);  // 假名顯示
     } else {
         content = noteText;  // 純文字顯示
     }

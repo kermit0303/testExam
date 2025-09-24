@@ -3,10 +3,15 @@
  [[pitch-q|\"[{\"k\":\"は\",\"p\":\"H\"}]\"]]
  [[blue-underline|い|這是備註]]
  [[icon-important|]]
- 
+ [[icon|success-icon]]
+ [[icon|error-icon]]
+ 、
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+V1.0.55
+- [Improvement] 新增 文法 P22
+
 V1.0.54
 - [Improvement] 新增 正式區
 - [BugFix] 調整note-top 高度
