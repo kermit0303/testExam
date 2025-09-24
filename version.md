@@ -9,6 +9,11 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+V1.0.57
+- [Improvement] 正式區
+V1.0.56
+- [Improvement] 新增 文法 P21
+
 V1.0.55
 - [Improvement] 新增 文法 P22
 
