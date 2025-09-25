@@ -132,8 +132,7 @@ ruby>rt {
   box-shadow: 0 3px 10px rgba(195, 180, 160, 0.12);
   /* 溫和棕色陰影 */
   border-radius: 12px;
-  overflow: hidden;
-      table-layout: fixed; /* ✅ 加上固定欄位計算 */
+    table-layout: fixed;  /* 固定欄位計算，iOS Safari 必須 */
 
 }
 
