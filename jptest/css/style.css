@@ -1,3 +1,7 @@
+ html, body {
+      min-width: 0; /* 對 flex 子元素生效 */
+      overflow-x: hidden; /* 避免橫向滾動 */
+    }
 html {
   scroll-padding-top: 80px;
   /* 和 toolbar 高度一致 */
@@ -21,10 +25,9 @@ p {
   overflow-wrap: anywhere;   /* iOS 也能換行 */
   white-space: normal;       /* 確保允許換行 */
 }
-
-.flex-parent {
-  min-width: 0;  /* 對 flex 子元素生效，iOS 才會縮小文字 */
-}
+ .flex-parent, .main, .inbody, .sidebar {
+      min-width: 0; /* iOS flex 子元素自動縮小 */
+    }
 .toolbar {
   position: fixed;
   top: 0;
