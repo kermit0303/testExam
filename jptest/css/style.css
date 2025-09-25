@@ -129,7 +129,10 @@ ruby>rt {
   box-shadow: 0 3px 10px rgba(195, 180, 160, 0.12);
   border-radius: 12px;
   overflow: hidden;
-  table-layout: fixed; /* 關鍵：iOS 避免自動撐寬 */
+  
+  display: block;       /* 讓 table 可換行 */
+  max-width: 100%;      /* 限制寬度不要超出螢幕 */
+  table-layout: auto;   /* 自動調整欄位 */
 }
 
 .table-jp th,
