@@ -1,17 +1,20 @@
-/* 全域安全設定 */
-* { box-sizing: border-box; }
-
-/* 外框固定，但不要用 100vw 在內部元素（可能引起 overflow） */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* 禁止整個頁面水平滾動 */
+html {
+  scroll-padding-top: 80px;
+  /* 和 toolbar 高度一致 */
 }
 
 section {
   scroll-margin-top: 60px;
   /* top-bar 的高度 */
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Noto Serif TC', sans-serif;
+  margin: 0;
+  background: #faf8f4;
+  color: #333;
+  overflow: hidden;
+  /* 這樣 body 就不會有滾軸了 */
 }
 
 .toolbar {
@@ -276,21 +279,22 @@ h2::before {
   letter-spacing: 0.3em;
 }
 .sidebar {
-  position: fixed;
-  top: 220px;
-  left: -240px; /* 直接隱藏在左邊，不用 transform */
+  position: fixed;       /* 固定在視窗 */
+  top: 220px;             /* 避開 toolbar */
+  left: 0;
   bottom: 0;
   width: 240px;
   background: #f9f6f0;
   padding: 30px 20px;
   overflow-y: auto;
   border-right: 1px solid #e4ddd4;
-  transition: left 0.3s ease;
+  transform: translateX(-100%);  /* 預設隱藏，移出畫面 */
+  transition: transform 0.3s ease;
   z-index: 50;
 }
 
 .sidebar.show {
-  left: 0; /* 顯示時滑入 */
+  transform: translateX(0);      /* 顯示時滑入 */
 }
 
 .sidebar h2 {
