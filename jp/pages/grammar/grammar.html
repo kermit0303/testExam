@@ -156,37 +156,58 @@
       border: 1px solid #ece7de;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
+      .box {
+          border: 2px solid #d8cfc4;
+          background: #fdfbf6;
+          padding: 5px 20px 5px 20px; /* 固定不動 */
+          margin: 2px;
+          border-radius: 12px;
+          box-shadow: 1px 2px 8px rgba(200, 180, 160, 0.15);
+          color: #5a5a5a;
+          font-size: 40px;
+          line-height: 1.6;
+          position: relative;
+          overflow: visible; /* 確保 rt 往外跑不被裁剪 */
+      }
+      .box:has(rt) {
+          margin-top: 30px; /* 往上頂出框線高度，讓 rt 領域可以「超出」框線 */
+          padding-top: 25px; /* 可根據需要調整 */
+          transition: margin-top 5.3s ease;
+
+      }
+
+          .box::before {
+              content: '✿';
+              position: absolute;
+              top: -20px;
+              left: -20px;
+              font-size: 24px;
+              color: #c8a98b;
+              padding: 0 10px;
+              border-radius: 50%;
+          }
+
+      ruby > span.box {
+          display: inline-flex;
+          align-items: baseline;
+      }
+
+      span.box > ruby {
+    display: inline-block;
+    position: relative;    /* rt 絕對定位參考 */
+}
+
+span.box > ruby > rt {
+    position: absolute;
+    bottom: 100%;         /* 放在文字正上方 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30PX;     /* 調整大小 */
+    line-height: 1;
+    white-space: nowrap;
+}
 
 
-    .box {
-      border: 2px solid #d8cfc4;
-      /* 淡米色邊框 */
-      background: #fdfbf6;
-      /* 柔和背景 */
-      padding: 12px 14px;
-      margin: 10px;
-      border-radius: 12px;
-      box-shadow: 1px 2px 8px rgba(200, 180, 160, 0.15);
-      /* 柔和陰影 */
-      color: #5a5a5a;
-      /* 和你主體一致的中灰字 */
-      font-size: 40px;
-      line-height: 1.6;
-      position: relative;
-    }
-
-    .box::before {
-      content: '✿';
-      position: absolute;
-      top: -12px;
-      left: 16px;
-      font-size: 24px;
-      color: #c8a98b;
-      /* 溫柔粉棕色點綴 */
-      background: #fdfbf6;
-      padding: 0 6px;
-      border-radius: 50%;
-    }
 
     .note-top {
       display: inline-block;
@@ -346,6 +367,7 @@
       box-sizing: border-box;
       padding: 10px;
     }
+
   </style>
 </head>
 
