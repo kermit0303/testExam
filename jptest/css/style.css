@@ -13,8 +13,10 @@ body {
   margin: 0;
   background: #faf8f4;
   color: #333;
-  overflow: hidden;
-  /* 這樣 body 就不會有滾軸了 */
+  overflow-x: hidden;  /* 水平滾軸隱藏 */
+  overflow-y: auto;    /* 垂直滾軸自動 */
+  word-break: break-word; /* 長字自動換行 */
+  overflow-wrap: break-word; /* 保險措施 */
 }
 
 .toolbar {
