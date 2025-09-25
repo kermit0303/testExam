@@ -1,20 +1,15 @@
-html {
-  scroll-padding-top: 80px;
-  /* 和 toolbar 高度一致 */
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* 外框不出現滾軸 */
 }
+
 
 section {
   scroll-margin-top: 60px;
   /* top-bar 的高度 */
-}
-
-body {
-  font-family: 'Noto Sans JP', 'Yu Gothic', 'Meiryo', 'Noto Serif TC', sans-serif;
-  margin: 0;
-  background: #faf8f4;
-  color: #333;
-  overflow: hidden;
-  /* 這樣 body 就不會有滾軸了 */
 }
 
 .toolbar {
