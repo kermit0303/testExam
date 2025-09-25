@@ -121,8 +121,19 @@ ruby>rt {
   display: inline-block;
   line-height: 1;
 }
+p, td, th, span, div {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
 
-.table-jp {
+/* 對 flex 子元素必須加 */
+.flex-parent, .main, .cell-wrap, .option-box, span.box, .blue-underline-wrapper {
+  min-width: 0;  /* 保證子元素可以縮小換行 */
+}
+.table-jp {  
+  max-width: 100%;
+
   width: 100%;
   border-collapse: collapse;
   font-family: 'Noto Serif TC', serif;
