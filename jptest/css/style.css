@@ -119,32 +119,38 @@ ruby>rt {
   display: inline-block;
   line-height: 1;
 }
-
 .table-jp {
   width: 100%;
   border-collapse: collapse;
   font-family: 'Noto Serif TC', serif;
   font-size: 36px;
   color: #5a5145;
-  /* 柔和棕灰文字 */
   background: #fbf9f3;
-  /* 超淡米白背景 */
   box-shadow: 0 3px 10px rgba(195, 180, 160, 0.12);
-  /* 溫和棕色陰影 */
   border-radius: 12px;
   overflow: hidden;
 }
 
-/* 統一 th、td 的排版與線條 */
 .table-jp th,
 .table-jp td {
   padding: 8px 12px;
   font-size: 40px;
   text-align: left;
   border-right: 1px solid #e5dccf;
-  /* 垂直分隔線 */
   border-bottom: 1px solid #ded6c8;
-  /* 水平底線 */
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.table-jp td:not(:first-child) {
+  max-width: calc(100% - 160px);
+}
+
+.table-jp th:first-child,
+.table-jp td:first-child {
+  width: 160px;
+  max-width: 160px;
 }
 
 .table-jp th:last-child,
