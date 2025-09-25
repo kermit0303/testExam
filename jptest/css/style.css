@@ -133,6 +133,8 @@ ruby>rt {
   /* 溫和棕色陰影 */
   border-radius: 12px;
   overflow: hidden;
+      table-layout: fixed; /* ✅ 加上固定欄位計算 */
+
 }
 
 /* 統一 th、td 的排版與線條 */
@@ -147,6 +149,10 @@ ruby>rt {
   word-break: break-word; /* 自動換行長文字 */
   white-space: normal;    /* 允許換行 */
   max-width: calc(100% - 160px);
+    word-break: break-word;      /* 自動換行 */
+    overflow-wrap: anywhere;     /* 長文字強制換行 */
+    white-space: normal;         /* 允許換行 */
+
 
   /* 水平底線 */
 }
