@@ -16,7 +16,15 @@ body {
   overflow: hidden;
   /* 這樣 body 就不會有滾軸了 */
 }
+p {
+  word-break: break-word;    /* 強制長文字換行 */
+  overflow-wrap: anywhere;   /* iOS 也能換行 */
+  white-space: normal;       /* 確保允許換行 */
+}
 
+.flex-parent {
+  min-width: 0;  /* 對 flex 子元素生效，iOS 才會縮小文字 */
+}
 .toolbar {
   position: fixed;
   top: 0;
