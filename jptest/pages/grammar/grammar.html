@@ -176,7 +176,7 @@
 
             .box:has(rt) {
                 margin-top: 10px; /* 往上頂出框線高度，讓 rt 領域可以「超出」框線 */
-                padding-top: 25px; /* 可根據需要調整 */
+                padding-top: 30px; /* 可根據需要調整 */
                 transition: margin-top 5.3s ease;
             }
 
@@ -362,31 +362,31 @@
 </head>
 
 <body>
-  <div class="toolbar">
-    <a href="../vocab/vocab.html">単語</a>
-    <a href="grammar.html" class="active">文型</a>
-    <a href="../record/record.html">記錄</a>
-    <p id="vid" style="color: #ccc;">V1.0.31</p>
-  </div>
-  <div class="inbody">
-    <div class="sidebar">
-      <ul id="category-list"></ul>
+    <div class="toolbar">
+        <a href="../vocab/vocab.html">単語</a>
+        <a href="grammar.html" class="active">文型</a>
+        <a href="../record/record.html">記錄</a>
+        <p id="vid" style="color: #ccc;">V1.0.31</p>
     </div>
-
-    <div class="main">
-      <div class="top-bar">
-        <button id="toggle-sidebar">☰</button>
-        <div class="search-box">
-          <input type="text" id="search-input" name="search" placeholder="搜尋文法關鍵詞…" oninput="search(this.value)">
-
+    <div class="inbody">
+        <div class="sidebar">
+            <ul id="category-list"></ul>
         </div>
-      </div>
-      <div id="grammar-content"></div>
+
+        <div class="main">
+            <div class="top-bar">
+                <button id="toggle-sidebar">☰</button>
+                <div class="search-box">
+                    <input type="text" id="search-input" name="search" placeholder="搜尋文法關鍵詞…" oninput="search(this.value)">
+
+                </div>
+            </div>
+            <div id="grammar-content"></div>
+        </div>
     </div>
-  </div>
-  <script src="../../js/getVersion.js"></script>
-  <script src="../../js/func.js"></script>
-  <script src="grammar.js"></script>
+    <script src="../../js/getVersion.js"></script>
+    <script src="../../js/func.js"></script>
+    <script src="grammar.js"></script>
 </body>
 
 </html>

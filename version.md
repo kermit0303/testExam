@@ -5,10 +5,18 @@
  [[icon-important|]]
  [[icon|success-icon]]
  [[icon|error-icon]]
+ ⬇
+ 「原形」
+ →
+
  、
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+ 
+V1.0.81
+- [Improvement] 主要是測試ruby不能包覆多層
+
 V1.0.57
 - [Improvement] 正式區
 V1.0.56

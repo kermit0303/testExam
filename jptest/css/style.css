@@ -419,6 +419,7 @@ h2::before {
     font-size: 0.8em;
     margin-right: 0.3em;
     user-select: none;
+    font-weight: bold;
 }
 
     .icon-important::before {
