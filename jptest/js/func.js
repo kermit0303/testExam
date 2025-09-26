@@ -7,7 +7,7 @@ function renderFurigana(jpArr) {
         if (token.f) {
             return `<ruby>${k}<rt>${token.f}</rt></ruby>`;
         } else {
-            return `<ruby>${k}</ruby>`;
+            return k;
         }
     }).join('');
 }
