@@ -66,12 +66,13 @@ body {
 .word {
   font-size: 28px;
 }
-
 ruby {
-  ruby-position: over;
-  margin-right: 5px;
-  font-size: 36px;
-  ruby-align: center;
+    ruby-position: over;
+    margin-right: 5px;
+    font-size: 36px;
+    ruby-align: center;
+    display: inline-block; /* 或 inline-flex */
+    white-space: normal; /* 允許換行 */
 }
 
 
@@ -158,7 +159,7 @@ p, td, th, span, div {
     border-right: 1px solid #e5dccf;
     border-bottom: 1px solid #ded6c8;
     white-space: normal !important;
-    word-break: break-word !important;
+    word-break: break-word !important; 
     overflow-wrap: break-word !important; /* anywhere 對 Safari 不穩定，用 break-word 更穩 */
     min-width: 0 !important; /* 關鍵：Safari 需要這個才會允許縮小欄位寬度 */
     
