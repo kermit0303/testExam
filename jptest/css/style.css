@@ -65,16 +65,12 @@ body {
   font-size: 28px;
 }
 
-ruby {
-    white-space: normal; /* 允許換行 */
-    word-break: break-word; /* 中文換行斷字 */
-    overflow-wrap: break-word; /* Safari 中也需要 */
-    min-width: 0; /* 防止寬度撐開容器 */
 
-    ruby-position: over;
-    margin-right: 5px;
-    font-size: 36px;
-    /* ruby-align 被大多數瀏覽器忽略，可以省略或不要依賴 */
+ruby {
+  ruby-position: over;
+  margin-right: 5px;
+  font-size: 36px;
+  ruby-align: center;
 }
 
 
