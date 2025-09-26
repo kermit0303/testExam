@@ -25,7 +25,7 @@ window.grammarData1 = [
                     {
                         "jp": [
                             {
-                                "k": "カメラ[[blue|(を)]]"
+                                "k": "カメラ[[yellow|(を)]]"
                             },
                             {
                                 "k": "買",
