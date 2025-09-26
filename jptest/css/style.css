@@ -13,8 +13,10 @@ body {
   margin: 0;
   background: #faf8f4;
   color: #333;
-  overflow: hidden;
-  /* 這樣 body 就不會有滾軸了 */
+  overflow-x: hidden;  /* 水平滾軸隱藏 */
+  overflow-y: auto;    /* 垂直滾軸自動 */
+  word-break: break-word; /* 長字自動換行 */
+  overflow-wrap: break-word; /* 保險措施 */
 }
 
 .toolbar {
@@ -119,8 +121,19 @@ ruby>rt {
   display: inline-block;
   line-height: 1;
 }
+p, td, th, span, div {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
 
-.table-jp {
+/* 對 flex 子元素必須加 */
+.flex-parent, .main, .cell-wrap, .option-box, span.box, .blue-underline-wrapper {
+  min-width: 0;  /* 保證子元素可以縮小換行 */
+}
+.table-jp {  
+  max-width: 100%;
+
   width: 100%;
   border-collapse: collapse;
   font-family: 'Noto Serif TC', serif;
