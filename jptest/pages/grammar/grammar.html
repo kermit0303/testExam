@@ -3,8 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>文法筆記系統</title>
   <link rel="stylesheet" href="../../css/style.css">
   <style>
@@ -172,10 +170,9 @@
           overflow: visible; /* 確保 rt 往外跑不被裁剪 */
       }
       .box:has(rt) {
-          margin-top: 30px; /* 往上頂出框線高度，讓 rt 領域可以「超出」框線 */
+          margin-top: 10px; /* 往上頂出框線高度，讓 rt 領域可以「超出」框線 */
           padding-top: 25px; /* 可根據需要調整 */
           transition: margin-top 5.3s ease;
-
       }
 
           .box::before {
@@ -195,20 +192,22 @@
       }
 
       span.box > ruby {
-    display: inline-block;
-    position: relative;    /* rt 絕對定位參考 */
-}
+          position: relative;
+          display: inline-block;
+      }
 
-span.box > ruby > rt {
-    position: absolute;
-    bottom: 100%;         /* 放在文字正上方 */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 30PX;     /* 調整大小 */
-    line-height: 1;
-    white-space: nowrap;
-}
-
+          span.box > ruby > rt {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translate(-50%, -100%);
+              font-size: 30px;
+              line-height: 1;
+              white-space: nowrap;
+              padding: 0 6px;
+              z-index: 15;
+              pointer-events: none; /* 防止 hover 或點擊造成意外 */
+          }
 
 
     .note-top {
@@ -224,23 +223,30 @@ span.box > ruby > rt {
       margin-top: 155px;
     }
 
-    .note-box-top {
-      position: absolute;
-      bottom: 100%;
-      /* 放在文字上方 */
-      left: 0;
-      transform: translateY(-70px);
-      /* 往上移 40px，確保不擋到本排文字 */
-      background: #fffae0;
-      border: 2px solid #e0c080;
-      border-radius: 6px;
-      padding: 2px 2px;
-      white-space: nowrap;
-      font-size: 24px;
-      pointer-events: none;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      z-index: 99999;
-    }
+      .note-box-top {
+          position: absolute;
+          bottom: 100%;
+          left: 0;
+          transform: translateY(-70px);
+          background: #fffae0;
+          border: 2px solid #e0c080;
+          border-radius: 6px;
+          padding: 2px 6px;
+          font-size: 24px;
+          pointer-events: none;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+          z-index: 99999;
+          white-space: nowrap; /* 外層強制不換行 */
+          display: inline-block;
+          writing-mode: horizontal-tb !important;
+      }
+
+          /* 裡面內容取消 nowrap */
+          .note-box-top > * {
+              white-space: nowrap !important;
+              word-break: break-word;
+              overflow-wrap: break-word;
+          }
 
     .note-arrow {
       position: absolute;

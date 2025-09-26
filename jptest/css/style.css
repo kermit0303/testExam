@@ -13,10 +13,8 @@ body {
   margin: 0;
   background: #faf8f4;
   color: #333;
-  overflow-x: hidden;  /* 水平滾軸隱藏 */
-  overflow-y: auto;    /* 垂直滾軸自動 */
-  word-break: break-word; /* 長字自動換行 */
-  overflow-wrap: break-word; /* 保險措施 */
+  overflow: hidden;
+  /* 這樣 body 就不會有滾軸了 */
 }
 
 .toolbar {
@@ -66,13 +64,17 @@ body {
 .word {
   font-size: 28px;
 }
+
 ruby {
+    white-space: normal; /* 允許換行 */
+    word-break: break-word; /* 中文換行斷字 */
+    overflow-wrap: break-word; /* Safari 中也需要 */
+    min-width: 0; /* 防止寬度撐開容器 */
+
     ruby-position: over;
     margin-right: 5px;
     font-size: 36px;
-    ruby-align: center;
-    display: inline-block; /* 或 inline-flex */
-    white-space: normal; /* 允許換行 */
+    /* ruby-align 被大多數瀏覽器忽略，可以省略或不要依賴 */
 }
 
 
@@ -122,19 +124,8 @@ ruby>rt {
   display: inline-block;
   line-height: 1;
 }
-p, td, th, span, div {
-  word-break: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-}
 
-/* 對 flex 子元素必須加 */
-.flex-parent, .main, .cell-wrap, .option-box, span.box, .blue-underline-wrapper {
-  min-width: 0;  /* 保證子元素可以縮小換行 */
-}
-.table-jp {  
-  max-width: 100%;
-
+.table-jp {
   width: 100%;
   border-collapse: collapse;
   font-family: 'Noto Serif TC', serif;
@@ -146,29 +137,21 @@ p, td, th, span, div {
   box-shadow: 0 3px 10px rgba(195, 180, 160, 0.12);
   /* 溫和棕色陰影 */
   border-radius: 12px;
-    table-layout: fixed;  /* 固定欄位計算，iOS Safari 必須 */
-
+  overflow: hidden;
 }
 
 /* 統一 th、td 的排版與線條 */
 .table-jp th,
 .table-jp td {
-    padding: 8px 12px;
-    font-size: 40px;
-    text-align: left;
-    border-right: 1px solid #e5dccf;
-    border-bottom: 1px solid #ded6c8;
-    white-space: normal !important;
-    word-break: break-word !important; 
-    overflow-wrap: break-word !important; /* anywhere 對 Safari 不穩定，用 break-word 更穩 */
-    min-width: 0 !important; /* 關鍵：Safari 需要這個才會允許縮小欄位寬度 */
-    
+  padding: 8px 12px;
+  font-size: 40px;
+  text-align: left;
+  border-right: 1px solid #e5dccf;
+  /* 垂直分隔線 */
+  border-bottom: 1px solid #ded6c8;
+  /* 水平底線 */
 }
-.table-jp th:first-child,
-.table-jp td:first-child {
-  width: 160px; /* 或依手機螢幕調整 */
-  max-width: 160px;
-}
+
 .table-jp th:last-child,
 .table-jp td:last-child {
   border-right: none;
