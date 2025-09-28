@@ -1,1 +1,1 @@
-document.getElementById("vid").textContent = "V1.0.81";
+document.getElementById("vid").textContent = "V1.0.82";

@@ -14,6 +14,9 @@
 
  6/24 影片先看一下
  
+V1.0.82
+- [Improvement] 更新到正式區
+ 
 V1.0.81
 - [Improvement] 主要是測試ruby不能包覆多層
 

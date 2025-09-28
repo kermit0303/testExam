@@ -5,9 +5,9 @@ function renderFurigana(jpArr) {
         let k = token.k;
 
         if (token.f) {
-            return `<ruby>${k}<rt>${token.f}</rt></ruby>`;
+            return `<ruby><rb>${k}</rb><rt>${token.f}</rt></ruby>`;
         } else {
-            return `<ruby>${k}</ruby>`;
+            return k;
         }
     }).join('');
 }
