@@ -177,7 +177,7 @@ ruby > rt {
         /* 柔和米棕，hover */
         cursor: pointer;
     }
-.table-jpble caption {
+.table-jp caption {
     caption-side: top;
     text-align: left !important;
     display: table-caption;   /* 確保使用表格標題 display */
