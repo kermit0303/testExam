@@ -160,7 +160,7 @@ function renderGrammarItem(item, batchIndex, idx) {
   // 處理說明段落（desp）
   if (item.desp) {
     const desc = document.createElement('p');
-      desc.className = 'line-zh';
+    desc.className = 'line-zh';
     if (Array.isArray(item.desp)) {
       desc.innerHTML = renderTagged(renderFurigana(item.desp), item);
     } else {
@@ -172,7 +172,7 @@ function renderGrammarItem(item, batchIndex, idx) {
   // 處理翻譯（trans）
   if (item.trans) {
     const zh = document.createElement('div');
-      zh.className = 'line-zh trans';
+    zh.className = 'line-zh trans';
     if (Array.isArray(item.trans)) {
       zh.innerHTML = renderTagged(renderFurigana(item.trans), item);
     } else {
@@ -202,8 +202,10 @@ function renderGrammarItem(item, batchIndex, idx) {
 
         const zh = document.createElement('p');
         zh.className = 'exam-zh';
-        zh.innerHTML = renderTagged(d.zh, item);
-        exampleBlock.appendChild(zh);
+        if (d.zh) {
+          zh.innerHTML = renderTagged(d.zh, item);
+          exampleBlock.appendChild(zh);
+        }
       });
       exContainer.appendChild(exampleBlock);
     });
