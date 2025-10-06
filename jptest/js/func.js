@@ -12,30 +12,44 @@ function renderFurigana(jpArr) {
     }).join('');
 }
 
+
+
 function renderTagged(text, item) {
     if (typeof text !== 'string') return text;
+
     let expanded = text.replace(/\[(\w+)\]/g, (_, key) => {
         if (!item || !(key in item)) return `[${key}]`;
         const v = item[key];
+
         if (Array.isArray(v)) {
+            let first = true; // ⬅️ 宣告在外層
             const inner = v.map(val => {
+                let str = "";
                 try {
                     const parsed = JSON.parse(val);
                     if (Array.isArray(parsed)) {
-                        return renderFurigana(parsed);
+                        if (!first) str += "<br>"; // 第二組之後才換行
+                        first = false;
+                        str += renderFurigana(parsed);
+                        return str;
                     }
                 } catch (e) {
+                    // 可改成 span 避免多餘換行
                     return `<div>${val}</div>`;
                 }
                 return `<div>${val}</div>`;
             }).join('');
+
             return `<span class="option-box">${inner}</span>`;
         }
+
         if (typeof v === 'string' || typeof v === 'number') {
             return String(v);
         }
+
         return `[${key}]`;
     });
+
     return renderTaggedText(expanded, item);
 }
 

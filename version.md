@@ -36,6 +36,8 @@
         ]
     },
 
+V1.0.86
+- [Improvement] 更新到正式區
 V1.0.85
 - [Improvement] 新增文法
 - [Improvement] 爸爸的體重紀錄
