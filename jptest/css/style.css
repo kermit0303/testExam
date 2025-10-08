@@ -122,6 +122,7 @@ ruby > rt {
 }
 
 .table-jp {
+    margin-top: 10px;
     width: 100%;
     border-collapse: collapse;
     font-family: 'Noto Serif TC', serif;
