@@ -36,6 +36,10 @@
         ]
     },
 
+V1.0.87
+- [Improvement] 新增第五課單字
+- [Improvement] table新增設定寬度
+
 V1.0.86
 - [Improvement] 更新到正式區
 V1.0.85
