@@ -14,6 +14,10 @@
 
  6/24 影片先看一下
  
+V1.0.91
+- [Improvement] 第五課單字完成
+- [BugFix] 調整に(時間助詞)在 特例版 型
+
 V1.0.90
 - [Improvement] 新增第五課單字
 - [Improvement] 更新到正式區
