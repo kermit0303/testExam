@@ -13,32 +13,18 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
- {
-        "tile": "9/30複習",
-        "exam": [
-            {
-                "id": 1,
-                "dia": [
-                    {
-                        "jp": [{
-                            "k": "言",
-                            "f": "い"
-                        }, {
-                            "k": "います→"
-                        },
-                        {
-                            "k": ""
-                        }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
+ 
+V1.0.88
+- [Improvement] 新增第五課單字
+- [Improvement] 新增9/30補充
+- [Improvement] option新增設定寬度
+
+V1.0.88
+- [Improvement] 新增第五課單字
+- [Improvement] table新增設定寬度
 
 V1.0.87
 - [Improvement] 新增第五課單字
-- [Improvement] table新增設定寬度
 
 V1.0.86
 - [Improvement] 更新到正式區
