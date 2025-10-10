@@ -122,6 +122,7 @@ ruby > rt {
 }
 
 .table-jp {
+    margin-top: 10px;
     width: 100%;
     border-collapse: collapse;
     font-family: 'Noto Serif TC', serif;
@@ -225,6 +226,7 @@ h2::before {
 
 
 .option-box {
+    padding: 0px 15px ;
     display: inline-block;
     /* 整個框框跟文字在同一行 */
     border-left: 3px solid #d8a47f;

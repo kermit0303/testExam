@@ -14,7 +14,11 @@
 
  6/24 影片先看一下
  
-V1.0.88
+V1.0.90
+- [Improvement] 新增第五課單字
+- [Improvement] 更新到正式區
+
+V1.0.89
 - [Improvement] 新增第五課單字
 - [Improvement] 新增9/30補充
 - [Improvement] option新增設定寬度

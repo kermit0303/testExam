@@ -550,6 +550,11 @@ function renderTable(data) {
     const cls = data.class || "table-jp";
     const caption = data.caption ? `<caption>${data.caption}</caption>` : "";
 
+    // 如果有設定 col 寬度
+    const colgroup = Array.isArray(data.col)
+        ? `<colgroup>${data.col.map(c => `<col style="width:${c};">`).join("")}</colgroup>`
+        : "";
+
     const header = data.header?.length
         ? `<thead><tr>${data.header.map(h => `<th>${renderCell(h)}</th>`).join("")}</tr></thead>`
         : "";
@@ -558,7 +563,7 @@ function renderTable(data) {
         `<tr>${row.map(cell => `<td>${renderCell(cell)}</td>`).join("")}</tr>`
     ).join("");
 
-    return `<table class="${cls}">${caption}${header}<tbody>${body}</tbody></table>`;
+    return `<table class="${cls}">${caption}${colgroup}${header}<tbody>${body}</tbody></table>`;
 }
 
 function renderCell(cell) {
