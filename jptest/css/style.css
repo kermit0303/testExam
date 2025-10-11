@@ -405,11 +405,11 @@ h2::before {
     display: inline-flex;
     flex-direction: column;
     align-items: center; /* 文字與備註置中 */
-    font-size: 1em;
+    font-size: 50px;
 }
 
 .undernote {
-    font-size: 0.6em;
+    font-size: 45px;
     color: #7a8a99; /* 柔和的灰藍色 */
     margin-top: 2px;
     user-select: none;

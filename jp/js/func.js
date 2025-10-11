@@ -160,7 +160,6 @@ function parseTaggedText(str, item = {}) {
                     }
                     else {
                         replaced = `<span class="${cls}">${innerParsed}</span>`;
-
                     }
                 } catch (e) {
                     // 不是 JSON → 當作普通字串處理
@@ -173,12 +172,23 @@ function parseTaggedText(str, item = {}) {
         else if (cls === 'blue-underline') {
             // 假設 innerParsed 是 "い|備註文字"
             const [text, note] = innerParsed.split('|');
-            replaced = `
+            if (text.startsWith('"') && text.endsWith('"')) {
+                innerParsed = text.slice(1, -1);
+                const arr = JSON.parse(innerParsed); // 嘗試解析 JSON
+                replaced = `<span class="blue-underline-wrapper">
+                <span class="underblue">${renderFurigana(arr)}</span>
+                <span class="undernote">${note ?? ''}</span>
+                </span>
+                `;      // 是 JSON 就用 renderFurigana
+            }
+            else {
+                replaced = `
             <span class="blue-underline-wrapper">
               <span class="underblue">${text}</span>
               <span class="undernote">${note ?? ''}</span>
             </span>
           `;
+            }
         }
         else if (cls === "furi") {
             try {
@@ -210,7 +220,7 @@ function renderPitchQuestion(kanaArray) {
     if (!Array.isArray(kanaArray) || kanaArray.length === 0) return '';
 
     const container = document.createElement('div');
-    
+
     container.style.position = 'relative';
     container.style.display = 'inline-flex';
     container.style.alignItems = 'center';
@@ -244,15 +254,15 @@ function renderPitchQuestion(kanaArray) {
     const marker = document.createElementNS(svgNS, 'marker');
     marker.setAttribute('id', 'arrowhead');
     marker.setAttribute('markerWidth', '4.5');
-marker.setAttribute('markerHeight', '3');
-marker.setAttribute('refX', '2.25');  // 放中間（4.5 的一半）
-marker.setAttribute('refY', '1.5');
+    marker.setAttribute('markerHeight', '3');
+    marker.setAttribute('refX', '2.25');  // 放中間（4.5 的一半）
+    marker.setAttribute('refY', '1.5');
     marker.setAttribute('orient', 'auto');
     marker.setAttribute('markerUnits', 'strokeWidth');
 
 
     const arrowPath = document.createElementNS(svgNS, 'path');
-arrowPath.setAttribute('d', 'M0,0 L0,3 L4.5,1.5 z');
+    arrowPath.setAttribute('d', 'M0,0 L0,3 L4.5,1.5 z');
     arrowPath.setAttribute('fill', '#d9534f');
 
     marker.appendChild(arrowPath);
@@ -586,7 +596,7 @@ function renderCell(cell) {
         // 純文字或標記字串
         return renderTagged(cell);
     }
-    
+
     // 如果是 {k,f} 的物件
     if (typeof cell === "object" && "k" in cell) {
         return renderFurigana([cell]);
