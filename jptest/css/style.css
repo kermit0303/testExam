@@ -416,12 +416,19 @@ h2::before {
 }
 
 .underblue {
-    color: #5a9bd4;
-    text-decoration: underline;
-    text-underline-position: under; /* 底線在字下方 */
-    cursor: pointer;
-}
+    position: relative;
+    display: inline-block; /* 建議加這行，確保底線寬度正確 */
 
+}
+.underblue::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: #5a9bd4;
+}
 .icon-important {
     color: #d14b4b;
     font-size: 0.8em;

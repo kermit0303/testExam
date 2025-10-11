@@ -3,7 +3,7 @@ const categoryList = document.getElementById('category-list');
 const grammarContent = document.getElementById('grammar-content');
 
 // ========= 全局設定 =========
-const maxBatch = 3;  // 假設最大有10批次，可依需求調整
+const maxBatch = 4;  // 假設最大有10批次，可依需求調整
 let currentBatch = 1;
 
 const loadedTitles = new Set();

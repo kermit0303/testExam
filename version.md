@@ -13,29 +13,34 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
+V1.0.93
+- [Improvement] 文法完成
+- [Improvement] 調整架構 備註的線條
+- [Improvement] 調整架構 note margin
+
 V1.0.92
-- [Improvement] 第1課單字完成
+- [Improvement] 第1課文法完成
 - [Improvement] 調整架構 grammardata1 是舊資料
 
 V1.0.91
-- [Improvement] 第五課單字完成
+- [Improvement] 第五課文法完成
 - [BugFix] 調整に(時間助詞)在 特例版 型
 
 V1.0.90
-- [Improvement] 新增第五課單字
+- [Improvement] 新增第五課文法
 - [Improvement] 更新到正式區
 
 V1.0.89
-- [Improvement] 新增第五課單字
+- [Improvement] 新增第五課文法
 - [Improvement] 新增9/30補充
 - [Improvement] option新增設定寬度
 
 V1.0.88
-- [Improvement] 新增第五課單字
+- [Improvement] 新增第五課文法
 - [Improvement] table新增設定寬度
 
 V1.0.87
-- [Improvement] 新增第五課單字
+- [Improvement] 新增第五課文法
 
 V1.0.86
 - [Improvement] 更新到正式區
