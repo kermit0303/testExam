@@ -2,29 +2,8 @@
 const categoryList = document.getElementById('category-list');
 const grammarContent = document.getElementById('grammar-content');
 
-// ========= 渲染左側標題 =========
-function renderSidebarOnly(item, batchIndex, idx) {
-  const id = `section-${batchIndex}-${idx}`;
-  if (!document.getElementById(`link-${id}`)) {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = `#${id}`;
-    a.id = `link-${id}`;
-    a.dataset.batchLink = batchIndex;
-
-    if (item.tile) {
-      if (Array.isArray(item.tile)) {
-        a.innerHTML = renderTagged(renderFurigana(item.tile), item);
-      } else {
-        a.innerHTML = renderTagged(item.tile, item);
-      }
-    }
-    li.appendChild(a);
-    categoryList.appendChild(li);
-  }
-}
 // ========= 全局設定 =========
-const maxBatch = 2;  // 假設最大有10批次，可依需求調整
+const maxBatch = 3;  // 假設最大有10批次，可依需求調整
 let currentBatch = 1;
 
 const loadedTitles = new Set();
@@ -33,7 +12,7 @@ const loadedContentsSet = new Set();
 
 // ========= 載入標題，只載入左側清單 =========
 function preloadTitles() {
-  for (let i = 1; i <= maxBatch; i++) {
+  for (let i = maxBatch; i >= 1; i--) {
     loadDataFile(`grammardata/grammar-data-${i}.js`, i, true);
   }
 }
@@ -49,23 +28,26 @@ async function loadBatch(batchIndex) {
 }
 
 // ========= 管理DOM，控制只保留當前及前後批次 =========
-function manageBatchDom(current) {
-  loadedContentsSet.forEach(batchIdx => {
-    if (batchIdx < current - 1 || batchIdx > current + 1) {
-      removeBatchContent(batchIdx);
-      loadedContentsSet.delete(batchIdx);
+async function manageBatchDom(currentIndex) {
+  const keep = [currentIndex - 1, currentIndex, currentIndex + 1];
+
+  // 1️⃣ 補齊缺失 batch
+  for (let idx of keep) {
+    if (idx >= 1 && idx <= maxBatch && !loadedContentsSet.has(idx)) {
+      await loadBatch(idx);
+    }
+  }
+
+  // 2️⃣ 刪除不在 keep 的 batch
+  document.querySelectorAll('.batch-container').forEach(el => {
+    const idx = parseInt(el.dataset.batchIndex);
+    if (!keep.includes(idx)) {
+      el.remove();
+      loadedContentsSet.delete(idx);
     }
   });
 }
 
-// ========= 移除指定批次內容與左側連結 =========
-function removeBatchContent(batchIndex) {
-  const sections = document.querySelectorAll(`[data-batch='${batchIndex}']`);
-  sections.forEach(sec => sec.remove());
-
-  const links = document.querySelectorAll(`[data-batch-link='${batchIndex}']`);
-  links.forEach(link => link.remove());
-}
 
 // ========= 延遲載入資料的函式 =========
 function loadDataFile(filePath, batchIndex, titlesOnly = false) {
@@ -82,6 +64,8 @@ function loadDataFile(filePath, batchIndex, titlesOnly = false) {
 
     const script = document.createElement('script');
     script.src = filePath;
+    script.async = false;
+    script.defer = false;
     script.onload = () => {
       const data = window[`grammarData${batchIndex}`];
       if (Array.isArray(data)) {
@@ -134,6 +118,29 @@ function renderSidebarOnly(item, batchIndex, idx) {
     categoryList.appendChild(li);
   }
 }
+
+// ========= 跳轉到某一頁 =========
+categoryList.addEventListener('click', async (e) => {
+  const link = e.target.closest('a');
+  if (!link) return;
+  e.preventDefault();
+
+  const batchIndex = parseInt(link.dataset.batchLink);
+
+  // 若該批次尚未載入 → 立即載入
+  if (!loadedContentsSet.has(batchIndex)) {
+    console.log(`載入缺失批次 ${batchIndex}`);
+    grammarContent.innerHTML = ''; // 清空或顯示 loading
+    await loadBatch(batchIndex);
+  }
+
+  // 然後滾到指定區塊
+  const target = document.querySelector(link.getAttribute('href'));
+  if (target) target.scrollIntoView({ behavior: 'smooth' });
+
+  // 接著釋放太遠的 batch，只留前後幾頁
+  manageBatchDom(batchIndex);
+});
 
 // ========= 渲染右側內容 =========
 function renderGrammarItem(item, batchIndex, idx) {
@@ -232,20 +239,21 @@ function renderGrammarItem(item, batchIndex, idx) {
 }
 
 // ========= 滾動監聽，滾動到底部時載入下一批 =========
-grammarContent.addEventListener('scroll', () => {
+let minLoadedBatch = maxBatch; // 最小已載入 batch
+grammarContent.addEventListener('scroll', async () => {
   if (grammarContent.scrollTop + grammarContent.clientHeight >= grammarContent.scrollHeight - 600) {
-    if (currentBatch >= maxBatch) return;
-    loadBatch(currentBatch + 1).then(() => {
-      currentBatch++;
-    });
+    if (minLoadedBatch <= 1) return;
+
+    const nextBatch = minLoadedBatch - 1;
+    await loadBatch(nextBatch);
+    minLoadedBatch = nextBatch;
   }
 });
 
 // ========= 頁面初始化 =========
 insertGlobalNoteMarker();
 preloadTitles();
-loadBatch(currentBatch);
-
+loadBatch(maxBatch);
 
 // ========= 搜尋功能 =========
 function search(keyword) {

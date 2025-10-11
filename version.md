@@ -13,7 +13,10 @@
  7/1 先不整理。 6/17 不整理
 
  6/24 影片先看一下
- 
+V1.0.92
+- [Improvement] 第1課單字完成
+- [Improvement] 調整架構 grammardata1 是舊資料
+
 V1.0.91
 - [Improvement] 第五課單字完成
 - [BugFix] 調整に(時間助詞)在 特例版 型
