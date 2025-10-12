@@ -45,21 +45,34 @@
 
   <!-- 渲染表格 -->
   <script>
-    function renderTable(data) {
-      const tbody = document.getElementById("recordTable").querySelector("tbody");
-      tbody.innerHTML = ""; // 先清空
+  function renderTable(data) {
+    const tbody = document.getElementById("recordTable").querySelector("tbody");
+    tbody.innerHTML = ""; // 清空
 
-      if (data && data.tables && data.tables[0].rows) {
-        data.tables[0].rows.forEach(row => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `<td>${row.date}</td><td>${row.note}</td>`;
-          tbody.appendChild(tr);
-        });
-      }
+    if (data && data.tables && data.tables[0].rows) {
+      data.tables[0].rows.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.date}</td>
+          <td>
+            ${row.note}
+            ${row.audio ? `<button onclick="playAudio('${row.audio}')">▶️</button>` : ""}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
+  }
 
-    // 預設載入 record-data-1.js 的資料
-    renderTable(window.recordData1);
-  </script>
+  // 播放 mp3
+  function playAudio(fileName) {
+    const audio = new Audio(`audio/${fileName}`);
+    audio.play();
+  }
+
+  // 預設載入資料
+  renderTable(window.recordData1);
+</script>
+
 </body>
 </html>

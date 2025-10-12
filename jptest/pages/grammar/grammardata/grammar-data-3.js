@@ -345,9 +345,7 @@ window.grammarData3 = [
                     }
                 ]
             }
-        ],
-
-        "visl": ""
+        ]
     },
     {
         "tile": [
@@ -412,7 +410,6 @@ window.grammarData3 = [
                 ]
             }
         ],
-        "visl": "",
         "note": {
             "note1": [
                 {

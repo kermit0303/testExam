@@ -12,8 +12,6 @@ function renderFurigana(jpArr) {
     }).join('');
 }
 
-
-
 function renderTagged(text, item) {
     if (typeof text !== 'string') return text;
 
@@ -57,6 +55,7 @@ function renderTaggedText(text, item = {}) {
     if (typeof text !== 'string') return text;
     return parseTaggedText(text, item);
 }
+
 function parseTaggedText(str, item = {}) {
     const tagRegex = /\[\[([\w-]+)\|/g;
     let result = '';
@@ -288,7 +287,6 @@ function renderPitchQuestion(kanaArray) {
     svg.appendChild(path);
     container.appendChild(svg);
 
-
     return container.outerHTML;
 }
 
@@ -369,103 +367,6 @@ function renderTextWithNote(noteText, item) {
     `;
 }
 
-function insertGlobalNoteMarker() {
-    if (document.getElementById('global-note-marker')) return; // 已經插入就跳過
-
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("style", "height:0;width:0;position:absolute");
-    svg.innerHTML = `
-        <defs>
-            <marker id="global-note-arrowhead" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
-                <polygon points="0 0, 6 3, 0 6" fill="#c8a98b" />
-            </marker>
-        </defs>
-    `;
-    svg.id = 'global-note-marker';
-    document.body.appendChild(svg);
-}
-
-function generateVisual(name) {
-    if (name === 'example-flow') {
-        const container = document.createElement('div');
-        container.className = 'container';
-        container.style.cssText = `
-            position: relative;
-            width: 600px;
-            height: 150px;
-            margin-top: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
-            padding: 20px 0;
-        `;
-
-        const nodes = ['A', 'B', 'C'];
-        nodes.forEach((text, i) => {
-            const div = document.createElement('div');
-            div.className = 'node';
-            div.id = text;
-            div.innerHTML = text;
-            div.style.left = `${50 + i * 200}px`;
-            div.style.position = 'absolute';
-            div.style.top = '50px';
-            div.style.padding = '10px 16px';
-            div.style.background = '#f5f1e9';
-            div.style.border = '1.5px solid #d8e2dc';
-            div.style.borderRadius = '6px';
-            div.style.fontWeight = 'bold';
-            div.style.boxShadow = '1px 1px 5px rgba(0,0,0,0.05)';
-            container.appendChild(div);
-        });
-
-        const label = document.createElement('div');
-        label.className = 'label';
-        label.innerHTML = '繞過 B 的情況';
-        label.style.cssText = `
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        `;
-        container.appendChild(label);
-
-        const svgNS = "http://www.w3.org/2000/svg";
-        const svg = document.createElementNS(svgNS, 'svg');
-        svg.setAttribute('xmlns', svgNS);
-        svg.setAttribute('aria-hidden', 'true');
-        svg.style.position = 'absolute';
-        svg.style.top = '0';
-        svg.style.left = '0';
-        svg.style.width = '100%';
-        svg.style.height = '100%';
-
-        const defs = document.createElementNS(svgNS, 'defs');
-        const marker = document.createElementNS(svgNS, 'marker');
-        marker.setAttribute('id', 'arrow');
-        marker.setAttribute('markerWidth', '6');
-        marker.setAttribute('markerHeight', '6');
-        marker.setAttribute('refX', '5');
-        marker.setAttribute('refY', '3');
-        marker.setAttribute('orient', 'auto');
-        const polygon = document.createElementNS(svgNS, 'polygon');
-        polygon.setAttribute('points', '0 0, 6 3, 0 6');
-        marker.appendChild(polygon);
-        defs.appendChild(marker);
-        svg.appendChild(defs);
-
-        const path = document.createElementNS(svgNS, 'path');
-        path.setAttribute('d', 'M65 100 V130 H565 V100');
-        path.setAttribute('stroke', '#3b6978');
-        path.setAttribute('stroke-width', '2');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('marker-end', 'url(#arrow)');
-        svg.appendChild(path);
-
-        container.appendChild(svg);
-        return container;
-    }
-    return null;
-}
 function renderFuriganaSvg(data) {
     const svgNS = "http://www.w3.org/2000/svg";
     const kanaFontSize = 30;
