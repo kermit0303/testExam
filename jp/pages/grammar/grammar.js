@@ -3,7 +3,7 @@ const categoryList = document.getElementById('category-list');
 const grammarContent = document.getElementById('grammar-content');
 
 // ========= 全局設定 =========
-const maxBatch = 4;  // 假設最大有10批次，可依需求調整
+const maxBatch = 5;  // 假設最大有10批次，可依需求調整
 let currentBatch = 1;
 
 const loadedTitles = new Set();
@@ -219,14 +219,6 @@ function renderGrammarItem(item, batchIndex, idx) {
     section.appendChild(exContainer);
   }
 
-  if (item.visl) {
-    const container = document.createElement('div');
-    container.className = 'svg-container';
-    const visual = generateVisual(item.visl);
-    if (visual) container.appendChild(visual);
-    section.appendChild(container);
-  }
-
   if (item.tables && Array.isArray(item.tables)) {
     item.tables.forEach(table => {
       const tableHTML = renderTagged(renderTable(table), item); // 傳入單一表格
@@ -280,3 +272,20 @@ sidebar.classList.remove('show');
 toggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('show');
 });
+
+// ========= 共用同一個箭頭標記 =========
+function insertGlobalNoteMarker() {
+    if (document.getElementById('global-note-marker')) return; // 已經插入就跳過
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", "height:0;width:0;position:absolute");
+    svg.innerHTML = `
+        <defs>
+            <marker id="global-note-arrowhead" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+                <polygon points="0 0, 6 3, 0 6" fill="#c8a98b" />
+            </marker>
+        </defs>
+    `;
+    svg.id = 'global-note-marker';
+    document.body.appendChild(svg);
+}

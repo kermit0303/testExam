@@ -14,6 +14,9 @@
 
  6/24 影片先看一下
  い形容詞 6.7. 還沒處理
+ V1.0.96
+- [Improvement] 更新到正式區
+
  V1.0.95
 - [Improvement] 調整架構 拿掉用不到的function
 - [Improvement] 新增grammer-data-5.js 
