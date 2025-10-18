@@ -83,28 +83,26 @@ table caption {
   <script src="../../js/getVersion.js"></script>
   <script src="../../js/func.js"></script>
   <script src="vocab.js"></script>
-</body>
 <audio id="audioPlayer"></audio>
+</body>
 
 </html>
 <script>
    const player = document.getElementById('audioPlayer');
-
 document.addEventListener('click', e => {
   if (!e.target.classList.contains('play-btn')) return;
+const fileName = e.target.dataset.audio.trim().replace(/"/g, "");
 
-  const fileName = e.target.dataset.audio;
   if (!fileName) return;
 
   // 停止正在播放的音檔
-  if (!player.paused && player.src.includes(fileName)) {
+  if (!player.paused) {
     player.pause();
     player.currentTime = 0;
-    return;
   }
 
-  // 設定新音檔
-  player.src = `audio/${fileName}`;
+  player.src = `audio/${fileName}`; // 相對路徑
   player.play().catch(err => console.error("播放失敗:", err));
 });
+
 </script>
