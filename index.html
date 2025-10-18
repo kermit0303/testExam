@@ -32,6 +32,8 @@
     var pageindex= page;
     if(page=='jptest')
       pageindex='jp';
+    if(page=='jptestV2')
+      pageindex='jp';
 
     // 動態設置 iframe 的 src
     document.getElementById("gameFrame").src = `${page}/${pageindex}.html`;
