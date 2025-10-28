@@ -14,8 +14,18 @@
 
  6/24 影片先看一下
  い形容詞 6.7. 還沒處理
+ V1.0.99
+- [Improvement] 10/27更新測試區
+- [Improvement] 爸的體重
+- [BugFix] 修改pitch的大小
+- [BugFix] 修改blue-underline文字大小
+
+ V1.0.98
+- [Improvement] 10/21更新到正式區
+- [Improvement] 爸的體重
+
  V1.0.97
-- [Improvement] 10/14更新到正是區
+- [Improvement] 10/14更新到正式區
 
  V1.0.96
 - [Improvement] 更新到正式區
