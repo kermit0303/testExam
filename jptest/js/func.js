@@ -326,9 +326,9 @@ function renderTwoPitch(kanaArray) {
     // 前後字高低轉換，直接用固定座標
     let points;
     if (kanaArray[0].p === 'H' && kanaArray[1].p === 'L') {
-        points = '10,12 60,12 60,70 130,70'; // 前高後低
+        points = '10,10 60,10 60,70 130,70'; // 前高後低
     } else if (kanaArray[0].p === 'L' && kanaArray[1].p === 'H') {
-        points = '25,90 95,90 95,20 165,20'; // 前低後高
+        points = '10,70 60,70 60,10 130,10'; // 前低後高
     } else {
         points = '25,50 95,50 165,50'; // 同高或同低，畫中線
     }

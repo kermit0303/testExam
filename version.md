@@ -14,6 +14,10 @@
 
  6/24 影片先看一下
  い形容詞 6.7. 還沒處理
+ V1.0.100
+- [Improvement] 10/27更新到正式區
+- [BugFix] 修改pitch的高度
+
  V1.0.99
 - [Improvement] 10/27更新測試區
 - [Improvement] 爸的體重

@@ -298,8 +298,8 @@ function renderTwoPitch(kanaArray) {
     container.style.position = 'relative';
     container.style.display = 'inline-flex';
     container.style.alignItems = 'center';
-    container.style.fontSize = '4rem';
-    container.style.gap = '50px';
+    container.style.fontSize = '3rem';
+    container.style.gap = '30px';
 
     // 建立文字 span
     kanaArray.forEach(item => {
@@ -316,8 +316,8 @@ function renderTwoPitch(kanaArray) {
     svg.style.position = 'absolute';
     svg.style.top = '0';
     svg.style.left = '0';
-    svg.style.width = '200px';  // 固定寬度
-    svg.style.height = '100px'; // 固定高度
+    svg.style.width = '150px';  // 固定寬度
+    svg.style.height = '80px'; // 固定高度
     svg.style.overflow = 'visible';
     svg.style.zIndex = '1';
 
@@ -326,9 +326,9 @@ function renderTwoPitch(kanaArray) {
     // 前後字高低轉換，直接用固定座標
     let points;
     if (kanaArray[0].p === 'H' && kanaArray[1].p === 'L') {
-        points = '25,20 95,20 95,95 165,95'; // 前高後低
+        points = '10,10 60,10 60,70 130,70'; // 前高後低
     } else if (kanaArray[0].p === 'L' && kanaArray[1].p === 'H') {
-        points = '25,90 95,90 95,20 165,20'; // 前低後高
+        points = '10,70 60,70 60,10 130,10'; // 前低後高
     } else {
         points = '25,50 95,50 165,50'; // 同高或同低，畫中線
     }
